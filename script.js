@@ -153,7 +153,7 @@ const testimonials = [
         text: '"The Cryptocrib Academy, has been one of the best things to happen to me, through them I have been able to get my entry level understanding of the world of blockchain up until how advanced I am currently. They Have also been a supportive family too, helping to keep sanity when things are tough and also encouragement to be better. Thank you Cryptocrib, Thank you Cryptocrib\'s Academy."',
         name: 'Fashaking',
         role: 'Contributor, Cryptocrib',
-        image: 'Fashaking.jpeg'
+        image: 'images/Fashaking.jpeg'
     },
     {
         text: '"The gamified learning experience made complex DeFi concepts actually enjoyable. Earning points and NFT certificates while learning kept me motivated throughout the entire program."',
@@ -174,6 +174,7 @@ function updateTestimonial(index) {
     const authorRole = testimonialCard.querySelector('.author-role');
     const counter = testimonialCard.querySelector('.testimonial-counter');
     const avatarImg = testimonialCard.querySelector('.avatar-img img');
+    const avatarLink = testimonialCard.querySelector('.avatar-link');
     
     testimonialCard.style.opacity = '0';
     testimonialCard.style.transform = 'translateY(20px)';
@@ -184,13 +185,16 @@ function updateTestimonial(index) {
         authorRole.textContent = testimonials[index].role;
         counter.textContent = `${index + 1}/${testimonials.length}`;
         
-        // Show Fashaking image only for first testimonial (index 0)
-        if (avatarImg) {
+        // Show Fashaking image and link only for first testimonial (index 0)
+        if (avatarImg && avatarLink) {
             if (index === 0 && testimonials[index].image) {
                 avatarImg.src = testimonials[index].image;
                 avatarImg.style.display = 'block';
+                avatarLink.href = 'https://x.com/FASHAKING3';
+                avatarLink.style.display = 'block';
             } else {
                 avatarImg.style.display = 'none';
+                avatarLink.style.display = 'none';
             }
         }
         

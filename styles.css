@@ -87,6 +87,11 @@ body {
     color: var(--text-primary);
 }
 
+.nav-links a.active {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
 .btn-duplicate {
     background-color: #0088FF;
     color: #ffffff !important;
@@ -751,7 +756,7 @@ body {
     object-fit: contain;
 }
 
-.chain-logo img[src="base.png"] {
+.chain-logo img[src="images/base.png"] {
     width: 80px;
     height: 80px;
 }
@@ -1005,6 +1010,21 @@ body {
     background-color: var(--accent);
     border-radius: 50%;
     opacity: 0.2;
+}
+
+.avatar-link {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    display: block;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+    z-index: 1;
+}
+
+.avatar-link:hover {
+    transform: scale(1.1);
 }
 
 .avatar-img {
