@@ -1,4 +1,4 @@
-// Animated words rotation with typewriter effect (like moonrepublic.io)
+// Animated words rotation with typewriter effect
 const words = ['Crypto trading', 'NFTs', 'Web3', 'Defi'];
 let currentWordIndex = 0;
 let isDeleting = false;
@@ -150,19 +150,20 @@ document.addEventListener('DOMContentLoaded', () => {
 let currentTestimonial = 0;
 const testimonials = [
     {
-        text: '"Cryptix makes crypto trading effortless. Fast transactions, low fees, and a sleek interface—exactly what I needed."',
-        name: 'Alex M.',
-        role: 'Blockchain Analyst at NovaChain'
+        text: '"The Cryptocrib Academy, has been one of the best things to happen to me, through them I have been able to get my entry level understanding of the world of blockchain up until how advanced I am currently. They Have also been a supportive family too, helping to keep sanity when things are tough and also encouragement to be better. Thank you Cryptocrib, Thank you Cryptocrib\'s Academy."',
+        name: 'Fashaking',
+        role: 'Contributor, Cryptocrib',
+        image: 'Fashaking.jpeg'
     },
     {
-        text: '"The security features give me complete peace of mind. I can trade with confidence knowing my assets are protected."',
+        text: '"The gamified learning experience made complex DeFi concepts actually enjoyable. Earning points and NFT certificates while learning kept me motivated throughout the entire program."',
         name: 'Sarah K.',
-        role: 'Crypto Investor'
+        role: 'DeFi Learner'
     },
     {
-        text: '"Best platform I\'ve used. The interface is intuitive and transactions are lightning fast. Highly recommend!"',
+        text: '"I\'ve tried multiple crypto education platforms, but Cryptocrib\'s interactive programs and learn-to-earn model are unmatched. The community support and expert-led sessions are invaluable."',
         name: 'Michael T.',
-        role: 'Day Trader'
+        role: 'Crypto Trader'
     }
 ];
 
@@ -172,6 +173,7 @@ function updateTestimonial(index) {
     const authorName = testimonialCard.querySelector('.author-name');
     const authorRole = testimonialCard.querySelector('.author-role');
     const counter = testimonialCard.querySelector('.testimonial-counter');
+    const avatarImg = testimonialCard.querySelector('.avatar-img img');
     
     testimonialCard.style.opacity = '0';
     testimonialCard.style.transform = 'translateY(20px)';
@@ -181,6 +183,16 @@ function updateTestimonial(index) {
         authorName.textContent = testimonials[index].name;
         authorRole.textContent = testimonials[index].role;
         counter.textContent = `${index + 1}/${testimonials.length}`;
+        
+        // Show Fashaking image only for first testimonial (index 0)
+        if (avatarImg) {
+            if (index === 0 && testimonials[index].image) {
+                avatarImg.src = testimonials[index].image;
+                avatarImg.style.display = 'block';
+            } else {
+                avatarImg.style.display = 'none';
+            }
+        }
         
         testimonialCard.style.opacity = '1';
         testimonialCard.style.transform = 'translateY(0)';
@@ -196,6 +208,9 @@ document.querySelector('.testimonial-btn.prev')?.addEventListener('click', () =>
     currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
     updateTestimonial(currentTestimonial);
 });
+
+// Initialize first testimonial with image
+updateTestimonial(0);
 
 // Auto-rotate testimonials
 setInterval(() => {
@@ -253,24 +268,69 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Animate crypto prices (simulate real-time updates)
-function animateCryptoPrices() {
-    const cryptoItems = document.querySelectorAll('.crypto-item');
+// Fetch real-time crypto prices from CoinGecko API
+async function fetchCryptoPrices() {
+    const coinIds = ['bitcoin', 'ethereum', 'tether', 'binancecoin', 'solana'];
+    const apiUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${coinIds.join(',')}&vs_currencies=usd&include_24hr_change=true`;
     
-    cryptoItems.forEach(item => {
-        const changeElement = item.querySelector('.change');
-        if (changeElement) {
-            // Randomly update prices slightly
-            const isPositive = Math.random() > 0.5;
-            const change = (Math.random() * 2).toFixed(2);
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        
+        // Store previous prices for change calculation
+        const cryptoItems = document.querySelectorAll('.crypto-item');
+        
+        cryptoItems.forEach(item => {
+            const coinId = item.getAttribute('data-coin-id');
+            const coinData = data[coinId];
             
-            changeElement.textContent = `${isPositive ? '+' : '-'}%${change}`;
-            changeElement.className = `change ${isPositive ? 'positive' : 'negative'}`;
-            
-            // Add pulse animation
-            changeElement.style.animation = 'pulse 0.5s ease';
-        }
-    });
+            if (coinData) {
+                const price = coinData.usd;
+                const change24h = coinData.usd_24h_change || 0;
+                
+                // Format price based on value
+                let formattedPrice;
+                if (price < 1) {
+                    formattedPrice = price.toFixed(4);
+                } else if (price < 1000) {
+                    formattedPrice = price.toFixed(2);
+                } else {
+                    formattedPrice = price.toLocaleString('en-US', { 
+                        minimumFractionDigits: 2, 
+                        maximumFractionDigits: 2 
+                    });
+                }
+                
+                // Update price
+                const amountElement = item.querySelector('.amount');
+                if (amountElement) {
+                    amountElement.textContent = formattedPrice;
+                }
+                
+                // Update change
+                const changeElement = item.querySelector('.change');
+                if (changeElement) {
+                    const isPositive = change24h >= 0;
+                    const changeText = `${isPositive ? '+' : ''}${change24h.toFixed(2)}%`;
+                    changeElement.textContent = changeText;
+                    changeElement.className = `change ${isPositive ? 'positive' : 'negative'}`;
+                    
+                    // Add pulse animation
+                    changeElement.style.animation = 'pulse 0.5s ease';
+                }
+            }
+        });
+    } catch (error) {
+        console.error('Error fetching crypto prices:', error);
+        // Fallback: show error message
+        const cryptoItems = document.querySelectorAll('.crypto-item');
+        cryptoItems.forEach(item => {
+            const amountElement = item.querySelector('.amount');
+            if (amountElement) {
+                amountElement.textContent = 'Error';
+            }
+        });
+    }
 }
 
 // Add pulse animation
@@ -283,8 +343,12 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
-// Update prices every 5 seconds
-setInterval(animateCryptoPrices, 5000);
+// Fetch prices on page load
+document.addEventListener('DOMContentLoaded', () => {
+    fetchCryptoPrices();
+    // Update prices every 30 seconds
+    setInterval(fetchCryptoPrices, 30000);
+});
 
 // Button hover effects
 document.querySelectorAll('.btn-primary').forEach(btn => {
@@ -386,5 +450,47 @@ interactiveElements.forEach(el => {
     });
 });
 
-console.log('Cryptix website loaded successfully!');
+// FAQ Dropdown functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(function(item) {
+        // Click handler for the entire button
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            const isActive = this.classList.contains('active');
+            
+            // Toggle current item
+            if (isActive) {
+                this.classList.remove('active');
+            } else {
+                this.classList.add('active');
+            }
+        });
+        
+        // Also handle clicks on the plus icon specifically
+        const plusIcon = item.querySelector('.faq-plus');
+        if (plusIcon) {
+            plusIcon.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const isActive = item.classList.contains('active');
+                
+                // Toggle current item
+                if (isActive) {
+                    item.classList.remove('active');
+                } else {
+                    item.classList.add('active');
+                }
+            });
+        }
+    });
+    
+    console.log('FAQ initialized with', faqItems.length, 'items');
+});
+
+console.log('Cryptocrib website loaded successfully!');
 
