@@ -498,3 +498,243 @@ document.addEventListener('DOMContentLoaded', function() {
 
 console.log('Cryptocrib website loaded successfully!');
 
+// Dashboard Welcome Message Update
+function updateWelcomeMessage() {
+    const welcomeTitle = document.getElementById('welcome-title');
+    if (!welcomeTitle) return;
+    
+    // Load username from settings
+    const savedData = localStorage.getItem('cryptocrib_settings');
+    if (savedData) {
+        try {
+            const data = JSON.parse(savedData);
+            if (data.cribName && data.cribName.trim()) {
+                welcomeTitle.textContent = `Welcome back, ${data.cribName}`;
+            } else if (data.username && data.username.trim()) {
+                welcomeTitle.textContent = `Welcome back, ${data.username}`;
+            } else {
+                welcomeTitle.textContent = 'Welcome back, 0xfemi';
+            }
+        } catch (e) {
+            console.error('Error parsing settings:', e);
+            welcomeTitle.textContent = 'Welcome back, 0xfemi';
+        }
+    } else {
+        welcomeTitle.textContent = 'Welcome back, 0xfemi';
+    }
+}
+
+// Update sidebar name on dashboard
+function updateSidebarName() {
+    const sidebarName = document.querySelector('.profile-name');
+    if (!sidebarName) return;
+    
+    const savedData = localStorage.getItem('cryptocrib_settings');
+    if (savedData) {
+        try {
+            const data = JSON.parse(savedData);
+            if (data.cribName && data.cribName.trim()) {
+                sidebarName.textContent = data.cribName;
+            } else if (data.username && data.username.trim()) {
+                sidebarName.textContent = data.username;
+            } else {
+                sidebarName.textContent = '0xfemi';
+            }
+        } catch (e) {
+            console.error('Error parsing settings:', e);
+            sidebarName.textContent = '0xfemi';
+        }
+    } else {
+        sidebarName.textContent = '0xfemi';
+    }
+}
+
+// Update all dashboard elements
+function updateDashboard() {
+    updateWelcomeMessage();
+    updateSidebarName();
+    updateHoursSpentUI();
+}
+
+// Update welcome message on dashboard load
+document.addEventListener('DOMContentLoaded', function() {
+    // Initial update
+    updateDashboard();
+    
+    // Listen for storage changes (from other tabs/windows)
+    window.addEventListener('storage', function(e) {
+        if (e.key === 'cryptocrib_settings') {
+            updateDashboard();
+        }
+    });
+    
+    // Custom event listener for same-tab updates (when settings are saved)
+    window.addEventListener('settingsUpdated', function() {
+        updateDashboard();
+    });
+    
+    // Update when page becomes visible (user navigates back)
+    document.addEventListener('visibilitychange', function() {
+        if (!document.hidden) {
+            updateDashboard();
+        }
+    });
+    
+    // Update when window gets focus (user switches back to tab)
+    window.addEventListener('focus', function() {
+        updateDashboard();
+    });
+    
+    // Also check periodically (every 2 seconds) if on dashboard page
+    if (window.location.pathname.includes('dashboard.html') || window.location.pathname.endsWith('dashboard.html')) {
+        setInterval(function() {
+            updateDashboard();
+        }, 2000);
+    }
+});
+
+// ---------------------------
+// Hours Spent Tracking Module
+// ---------------------------
+(function initHoursSpentTracker() {
+    const STORAGE_KEY = 'cryptocrib_time';
+    const WEEKLY_GOAL_HOURS = 20; // change if desired
+    const IDLE_THRESHOLD_MS = 60 * 1000; // 1 minute idle pause
+    let lastActivityTs = Date.now();
+    let ticking = false;
+    let tickIntervalId = null;
+
+    function getWeekStart(date) {
+        const d = new Date(date);
+        const day = d.getDay(); // 0 Sun .. 6 Sat
+        const diffToMonday = (day + 6) % 7; // days since Monday
+        d.setHours(0, 0, 0, 0);
+        d.setDate(d.getDate() - diffToMonday);
+        return d.toISOString().slice(0, 10); // YYYY-MM-DD
+    }
+
+    function loadTime() {
+        try {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (!raw) {
+                return {
+                    totalSeconds: 0,
+                    weeklySeconds: 0,
+                    weekStart: getWeekStart(new Date())
+                };
+            }
+            const data = JSON.parse(raw);
+            // Reset weekly if week changed
+            const currentWeekStart = getWeekStart(new Date());
+            if (data.weekStart !== currentWeekStart) {
+                data.weekStart = currentWeekStart;
+                data.weeklySeconds = 0;
+            }
+            if (typeof data.totalSeconds !== 'number') data.totalSeconds = 0;
+            if (typeof data.weeklySeconds !== 'number') data.weeklySeconds = 0;
+            return data;
+        } catch {
+            return {
+                totalSeconds: 0,
+                weeklySeconds: 0,
+                weekStart: getWeekStart(new Date())
+            };
+        }
+    }
+
+    function saveTime(data) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        // Notify other listeners to update UI
+        const evt = new Event('storage');
+        Object.defineProperty(evt, 'key', { value: STORAGE_KEY });
+        Object.defineProperty(evt, 'newValue', { value: JSON.stringify(data) });
+        window.dispatchEvent(evt);
+    }
+
+    function secondsToHoursLabel(seconds) {
+        const hours = seconds / 3600;
+        return `${hours.toFixed(1)}h`;
+    }
+
+    // UI updates
+    window.updateHoursSpentUI = function updateHoursSpentUI() {
+        const valueEl = document.getElementById('hours-spent-value');
+        const barEl = document.getElementById('hours-spent-progress');
+        if (!valueEl && !barEl) return;
+        const data = loadTime();
+        if (valueEl) valueEl.textContent = secondsToHoursLabel(data.totalSeconds);
+        if (barEl) {
+            const pct = Math.min(100, (data.weeklySeconds / (WEEKLY_GOAL_HOURS * 3600)) * 100);
+            barEl.style.width = `${pct.toFixed(0)}%`;
+        }
+    };
+
+    function shouldCountNow() {
+        // Count only when page is visible and the user was active recently
+        if (document.hidden) return false;
+        if (!document.hasFocus && typeof document.hasFocus === 'function') {
+            // if hasFocus exists and returns false, don't count
+            if (!document.hasFocus()) return false;
+        }
+        return Date.now() - lastActivityTs < IDLE_THRESHOLD_MS;
+    }
+
+    function tick() {
+        if (!shouldCountNow()) return;
+        const data = loadTime();
+        data.totalSeconds += 1;
+        data.weeklySeconds += 1;
+        saveTime(data);
+        // If UI is present, update immediately
+        updateHoursSpentUI();
+    }
+
+    function startTicking() {
+        if (ticking) return;
+        ticking = true;
+        tickIntervalId = setInterval(tick, 1000);
+    }
+
+    function stopTicking() {
+        ticking = false;
+        if (tickIntervalId) {
+            clearInterval(tickIntervalId);
+            tickIntervalId = null;
+        }
+    }
+
+    // Activity listeners
+    ['mousemove', 'keydown', 'click', 'scroll', 'touchstart'].forEach(evt =>
+        window.addEventListener(evt, () => (lastActivityTs = Date.now()))
+    );
+
+    // Visibility/Focus
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+            lastActivityTs = Date.now();
+            startTicking();
+        } else {
+            stopTicking();
+        }
+    });
+    window.addEventListener('focus', () => {
+        lastActivityTs = Date.now();
+        startTicking();
+    });
+    window.addEventListener('blur', () => {
+        stopTicking();
+    });
+
+    // Cross-tab UI updates
+    window.addEventListener('storage', (e) => {
+        if (e && e.key === STORAGE_KEY) {
+            updateHoursSpentUI();
+        }
+    });
+
+    // Initialize
+    lastActivityTs = Date.now();
+    startTicking();
+    // Ensure UI reflects saved values on load
+    document.addEventListener('DOMContentLoaded', updateHoursSpentUI);
+})();

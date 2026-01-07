@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard – Cryptocrib Academy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000;family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dashboard-body">
+    <!-- Dashboard Layout -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <span class="logo-text">Cryptocrib</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <p class="nav-section-title">PLATFORM</p>
+                    <a href="dashboard.html" class="nav-item active">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.5 10L10 2.5L17.5 10M10 17.5V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M16.25 2.5H3.75C3.05964 2.5 2.5 3.05964 2.5 3.75V16.25C2.5 16.9404 3.05964 17.5 3.75 17.5H16.25C16.9404 17.5 17.5 16.9404 17.5 16.25V3.75C17.5 3.05964 16.9404 2.5 16.25 2.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M7.5 2.5V17.5M2.5 7.5H17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>My Courses</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.8333 3.33333H4.16667C3.24619 3.33333 2.5 4.07952 2.5 5V16.6667C2.5 17.5871 3.24619 18.3333 4.16667 18.3333H15.8333C16.7538 18.3333 17.5 17.5871 17.5 16.6667V5C17.5 4.07952 16.7538 3.33333 15.8333 3.33333Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M13.3333 1.66667V5M6.66667 1.66667V5M2.5 8.33333H17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Schedule</span>
+                        <span class="nav-badge">2</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.5 17.5C17.5 15.8431 16.1574 14.5 14.5 14.5C12.8426 14.5 11.5 15.8431 11.5 17.5M17.5 17.5C17.5 15.8431 16.1574 14.5 14.5 14.5C12.8426 14.5 11.5 15.8431 11.5 17.5M17.5 17.5H2.5M11.5 17.5H2.5M14.5 9.16667C16.1574 9.16667 17.5 7.82405 17.5 6.16667C17.5 4.50929 16.1574 3.16667 14.5 3.16667C12.8426 3.16667 11.5 4.50929 11.5 6.16667C11.5 7.82405 12.8426 9.16667 14.5 9.16667ZM8.5 9.16667C10.1574 9.16667 11.5 7.82405 11.5 6.16667C11.5 4.50929 10.1574 3.16667 8.5 3.16667C6.84264 3.16667 5.5 4.50929 5.5 6.16667C5.5 7.82405 6.84264 9.16667 8.5 9.16667ZM8.5 9.16667C6.84264 9.16667 5.5 10.5093 5.5 12.1667C5.5 13.824 6.84264 15.1667 8.5 15.1667C10.1574 15.1667 11.5 13.824 11.5 12.1667C11.5 10.5093 10.1574 9.16667 8.5 9.16667Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Community</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 2.5L12.5 8.33333L18.3333 9.16667L14.1667 13.3333L15 19.1667L10 16.25L5 19.1667L5.83333 13.3333L1.66667 9.16667L7.5 8.33333L10 2.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Achievements</span>
+                    </a>
+                </div>
+                <div class="nav-section">
+                    <p class="nav-section-title">ACCOUNT</p>
+                    <a href="settings.html" class="nav-item">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 10C12.7614 10 15 7.76142 15 5C15 2.23858 12.7614 0 10 0C7.23858 0 5 2.23858 5 5C5 7.76142 7.23858 10 10 10Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M0 20C0 15.5817 4.47715 12 10 12C15.5228 12 20 15.5817 20 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Settings</span>
+                    </a>
+                </div>
+            </nav>
+            <div class="sidebar-profile">
+                <div class="profile-avatar">
+                    <img src="https://ui-avatars.com/api/?name=0xfemi&background=0088FF&color=fff" alt="0xfemi" />
+                </div>
+                <div class="profile-info">
+                    <p class="profile-name">0xfemi</p>
+                    <p class="profile-role">Pro Student</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="header-left">
+                    <div class="breadcrumbs">
+                        <span>Home</span>
+                        <span class="breadcrumb-separator">></span>
+                        <span>Dashboard</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="search-bar">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.33333 12.6667C10.2789 12.6667 12.6667 10.2789 12.6667 7.33333C12.6667 4.38781 10.2789 2 7.33333 2C4.38781 2 2 4.38781 2 7.33333C2 10.2789 4.38781 12.6667 7.33333 12.6667Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M14 14L11.1 11.1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <input type="text" placeholder="Search..." />
+                    </div>
+                    <button class="notification-btn">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 6.66667C15 5.34058 14.4732 4.06881 13.5355 3.13115C12.5979 2.19349 11.3261 1.66667 10 1.66667C8.67392 1.66667 7.40215 2.19349 6.46447 3.13115C5.52678 4.06881 5 5.34058 5 6.66667C5 12.5 2.5 14.1667 2.5 14.1667H17.5C17.5 14.1667 15 12.5 15 6.66667Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M11.4417 17.5C11.1434 17.8313 10.7656 18.0833 10.3433 18.2341C9.92097 18.3849 9.46666 18.4294 9.02509 18.3634C8.58352 18.2974 8.16786 18.123 7.81675 17.8562C7.46564 17.5894 7.18995 17.2388 7.01667 16.8333" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="btn-new-goal">+ New Goal</button>
+                </div>
+            </header>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- Welcome Section -->
+                <section class="welcome-section">
+                    <h1 class="welcome-title" id="welcome-title">Welcome back, 0xfemi</h1>
+                    <p class="welcome-subtitle">You've learned 80% more this week than last week</p>
+                </section>
+
+                <!-- Stats Grid -->
+                <section class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <p class="stat-label">HOURS SPENT</p>
+                            <span class="stat-change positive">↑ 12%</span>
+                        </div>
+                        <h3 class="stat-value" id="hours-spent-value">0.0h</h3>
+                        <div class="stat-progress">
+                            <div class="stat-progress-bar" id="hours-spent-progress" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <p class="stat-label">SKILLS ACQUIRED</p>
+                            <span class="stat-change positive">↑ 4</span>
+                        </div>
+                        <h3 class="stat-value">12</h3>
+                        <div class="stat-skills">
+                            <span class="skill-tag">JS</span>
+                            <span class="skill-tag">UI</span>
+                            <span class="skill-tag">3D</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <p class="stat-label">AVG SCORE</p>
+                        </div>
+                        <h3 class="stat-value">92%</h3>
+                        <div class="stat-chart">
+                            <div class="chart-bar" style="height: 92%"></div>
+                            <div class="chart-bar" style="height: 60%"></div>
+                            <div class="chart-bar" style="height: 45%"></div>
+                            <div class="chart-bar" style="height: 30%"></div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <p class="stat-label">UPCOMING</p>
+                        </div>
+                        <h3 class="stat-value">3</h3>
+                        <div class="stat-upcoming">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.6667 2H3.33333C2.59695 2 2 2.59695 2 3.33333V13.3333C2 14.0697 2.59695 14.6667 3.33333 14.6667H12.6667C13.403 14.6667 14 14.0697 14 13.3333V3.33333C14 2.59695 13.403 2 12.6667 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M10.6667 1.33333V4M5.33333 1.33333V4M2 6.66667H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Next: React Pattern...</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Course in Progress -->
+                <section class="course-progress-section">
+                    <div class="course-card">
+                        <div class="course-badge">IN PROGRESS</div>
+                        <div class="course-content">
+                            <div class="course-image">
+                                <div class="course-image-placeholder">
+                                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="40" height="40" rx="8" fill="#0088FF"/>
+                                        <path d="M20 12L25 17H22V23H18V17H15L20 12Z" fill="white"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="course-info">
+                                <h3 class="course-title">Advanced System Architecture</h3>
+                                <p class="course-lesson">Lesson 4 of 12</p>
+                                <div class="course-progress">
+                                    <div class="course-progress-bar">
+                                        <div class="course-progress-fill" style="width: 35%"></div>
+                                    </div>
+                                    <span class="course-progress-text">35%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn-continue">Continue →</button>
+                            <button class="btn-view-details">View Details</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Learning Paths Section -->
+                <section class="learning-paths-section">
+                    <h2 class="section-title">Learning Paths</h2>
+                    <div class="paths-grid">
+                        <div class="path-card unlocked">
+                            <div class="path-icon green">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <h3 class="path-title">Beginner Path: Foundations</h3>
+                            <p class="path-description">Start your journey with core concepts of blockchain, wallets, and basic security practices</p>
+                            <div class="path-progress">
+                                <div class="path-progress-bar">
+                                    <div class="path-progress-fill green" style="width: 70%"></div>
+                                </div>
+                                <span class="path-progress-text">70% Complete</span>
+                            </div>
+                            <div class="path-actions">
+                                <button class="btn-path-continue">Continue →</button>
+                                <button class="btn-path-details">View Details</button>
+                            </div>
+                        </div>
+                        <div class="path-card locked">
+                            <div class="path-icon grey">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M7 11V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <h3 class="path-title">Intermediate Path: DeFi Protocols</h3>
+                            <p class="path-description">Deep dive into decentralized finance, liquidity pools, and smart contract interactions</p>
+                            <p class="path-lock-text">Complete Beginner to Unlock</p>
+                        </div>
+                        <div class="path-card locked">
+                            <div class="path-icon grey">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M7 11V7C7 5.67392 7.52678 4.40215 8.46447 3.46447C9.40215 2.52678 10.6739 2 12 2C13.3261 2 14.5979 2.52678 15.5355 3.46447C16.4732 4.40215 17 5.67392 17 7V11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <h3 class="path-title">Advanced Path: Smart Contract Auditing</h3>
+                            <p class="path-description">Master security auditing, EVM opcodes, and advanced vulnerability detection</p>
+                            <p class="path-lock-text">Locked</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Schedule and Sync Section -->
+                <section class="schedule-sync-section">
+                    <div class="schedule-card">
+                        <h3 class="schedule-title">Today's Schedule</h3>
+                        <div class="schedule-items">
+                            <div class="schedule-item">
+                                <div class="schedule-time">09:00</div>
+                                <div class="schedule-content">
+                                    <p class="schedule-event">System Design Live</p>
+                                    <p class="schedule-meta">Zoom • Dr. A. Smith</p>
+                                    <div class="schedule-participants">
+                                        <span>+4</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="schedule-item">
+                                <div class="schedule-time">11:30</div>
+                                <div class="schedule-content">
+                                    <p class="schedule-event">Team Project Sync</p>
+                                    <p class="schedule-meta">Discord Channel #general</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sync-card">
+                        <h3 class="sync-title">Sync</h3>
+                        <div class="sync-content">
+                            <p class="sync-channel">Discord Channel #general</p>
+                            <div class="sync-task">
+                                <div class="sync-time">14:00</div>
+                                <div class="sync-details">
+                                    <p class="sync-event">UX Case Study Review</p>
+                                    <p class="sync-deadline">Submit before 5 PM</p>
+                                    <span class="sync-badge deadline">Deadline</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Check authentication before loading dashboard
+        (function() {
+            const authData = localStorage.getItem('cryptocrib_auth');
+            if (!authData) {
+                // Not logged in, redirect to auth page
+                window.location.href = 'auth.html';
+                return;
+            }
+            
+            try {
+                const auth = JSON.parse(authData);
+                if (!auth.isLoggedIn) {
+                    window.location.href = 'auth.html';
+                    return;
+                }
+            } catch (e) {
+                // Invalid auth data, redirect
+                window.location.href = 'auth.html';
+                return;
+            }
+        })();
+        
+        // Immediate update on dashboard load
+        (function() {
+            // Migrate old "Alex Morgan" to "0xfemi" if needed
+            const savedData = localStorage.getItem('cryptocrib_settings');
+            if (savedData) {
+                try {
+                    const data = JSON.parse(savedData);
+                    let updated = false;
+                    
+                    // Update cribName if it's "Alex Morgan"
+                    if (data.cribName === 'Alex Morgan') {
+                        data.cribName = '0xfemi';
+                        updated = true;
+                    }
+                    
+                    // Update username if it's "Alex Morgan"
+                    if (data.username === 'Alex Morgan') {
+                        data.username = '0xfemi';
+                        updated = true;
+                    }
+                    
+                    // If no cribName/username exists, set default
+                    if (!data.cribName && !data.username) {
+                        data.cribName = '0xfemi';
+                        updated = true;
+                    }
+                    
+                    if (updated) {
+                        localStorage.setItem('cryptocrib_settings', JSON.stringify(data));
+                    }
+                } catch (e) {
+                    console.error('Error migrating settings:', e);
+                }
+            }
+            
+            function updateDashboardWelcome() {
+                const welcomeTitle = document.getElementById('welcome-title');
+                if (welcomeTitle) {
+                    const savedData = localStorage.getItem('cryptocrib_settings');
+                    if (savedData) {
+                        try {
+                            const data = JSON.parse(savedData);
+                            if (data.cribName && data.cribName.trim()) {
+                                welcomeTitle.textContent = 'Welcome back, ' + data.cribName;
+                            } else if (data.username && data.username.trim()) {
+                                welcomeTitle.textContent = 'Welcome back, ' + data.username;
+                            } else {
+                                welcomeTitle.textContent = 'Welcome back, 0xfemi';
+                            }
+                        } catch (e) {
+                            console.error('Error updating welcome message:', e);
+                            welcomeTitle.textContent = 'Welcome back, 0xfemi';
+                        }
+                    } else {
+                        welcomeTitle.textContent = 'Welcome back, 0xfemi';
+                    }
+                }
+                
+                // Update sidebar name
+                const sidebarName = document.querySelector('.profile-name');
+                if (sidebarName) {
+                    const savedData = localStorage.getItem('cryptocrib_settings');
+                    if (savedData) {
+                        try {
+                            const data = JSON.parse(savedData);
+                            if (data.cribName && data.cribName.trim()) {
+                                sidebarName.textContent = data.cribName;
+                            } else if (data.username && data.username.trim()) {
+                                sidebarName.textContent = data.username;
+                            } else {
+                                sidebarName.textContent = '0xfemi';
+                            }
+                        } catch (e) {
+                            console.error('Error updating sidebar name:', e);
+                            sidebarName.textContent = '0xfemi';
+                        }
+                    } else {
+                        sidebarName.textContent = '0xfemi';
+                    }
+                }
+            }
+            
+            // Run immediately
+            updateDashboardWelcome();
+            
+            // Run on DOM ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', updateDashboardWelcome);
+            } else {
+                updateDashboardWelcome();
+            }
+            
+            // Listen for settings updates
+            window.addEventListener('settingsUpdated', updateDashboardWelcome);
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'cryptocrib_settings') {
+                    updateDashboardWelcome();
+                }
+            });
+            
+            // Update on focus
+            window.addEventListener('focus', updateDashboardWelcome);
+        })();
+    </script>
+</body>
+</html>
+
