@@ -7,13 +7,40 @@ const LESSON_CONTENT = {
         title: 'What is Blockchain?',
         story: `
             <div class="story-paragraph">
-                <p>Blockchain is a distributed ledger technology that maintains a continuously growing list of records called blocks,<br>
-                linked and secured using cryptography, where each block contains a cryptographic hash of the previous block, a timestamp, and transaction data,<br>
-                creating an immutable chain resistant to data modification, first introduced through Bitcoin which enables peer-to-peer electronic systems to function without trusted central authorities,<br>
-                using network participants called nodes to validate transactions through consensus mechanisms like Proof of Work where miners compete to solve cryptographic puzzles,<br>
-                ensuring no single point of failure exists as blockchain data is distributed across thousands of computers worldwide with each node maintaining a complete copy,<br>
-                and beyond digital currencies, blockchain technology enables smart contracts—self-executing programs that automatically enforce agreements—transforming blockchain into a global decentralized computer,<br>
-                capable of running applications without downtime, censorship, or third-party interference, representing a paradigm shift toward open, transparent, and user-controlled digital systems.</p>
+                <p>Blockchain is a distributed ledger technology that maintains a continuously growing list of records, called blocks, which are linked and secured using cryptography.</p>
+                <p>Each block typically contains a cryptographic hash of the previous block, a timestamp, and transaction data. By design, a blockchain is resistant to modification of its data.</p>
+            </div>
+            <div class="story-paragraph">
+                <h3>Key Concepts</h3>
+                <ul>
+                    <li><strong>Decentralization:</strong> No central authority controls the blockchain</li>
+                    <li><strong>Immutability:</strong> Once data is recorded, it cannot be altered</li>
+                    <li><strong>Transparency:</strong> All participants can view the transaction history</li>
+                    <li><strong>Security:</strong> Cryptographic hashing ensures data integrity</li>
+                </ul>
+            </div>
+        `,
+        resourceSummary: `
+            <div class="resource-summary">
+                <p>Blockchain technology represents a revolutionary approach to data management and transaction processing, fundamentally changing how we think about digital trust and decentralized systems. At its core, a blockchain is a distributed database that maintains a continuously growing list of records called blocks, which are linked and secured using cryptographic principles. Each block contains a cryptographic hash of the previous block, a timestamp, and transaction data, creating an immutable chain where any attempt to alter historical data becomes immediately apparent and computationally infeasible.</p>
+                
+                <p>According to Bitcoin.org, the blockchain concept was first introduced through Bitcoin, which demonstrated how a peer-to-peer electronic cash system could function without the need for a trusted central authority. The Bitcoin blockchain works by having network participants, known as nodes, validate and relay transactions through a consensus mechanism called Proof of Work. Miners compete to solve complex cryptographic puzzles, and the first to solve it gets the right to add a new block to the chain, receiving Bitcoin as a reward. This process ensures that all participants agree on the state of the ledger without requiring trust in any single entity.</p>
+                
+                <p>Binance Academy explains that blockchain's decentralized nature means no single point of failure exists in the system. Unlike traditional databases managed by a central administrator, blockchain data is distributed across thousands of computers worldwide. Each node maintains a complete copy of the blockchain, and when new transactions are broadcast, nodes independently verify them according to the network's consensus rules. This distribution ensures that even if many nodes fail or are compromised, the network continues to operate reliably.</p>
+                
+                <p>The immutability of blockchain comes from its cryptographic design, where each block contains a hash of the previous block. If someone attempts to modify a transaction in an earlier block, they would need to recalculate the hash for that block and all subsequent blocks, which becomes exponentially more difficult with each new block added. Additionally, they would need to control more than 50% of the network's computational power, making such attacks economically unfeasible for large, established blockchains like Bitcoin and Ethereum.</p>
+                
+                <p>Ethereum.org highlights that blockchain technology extends far beyond digital currencies. Ethereum introduced the concept of smart contracts—self-executing programs that automatically enforce the terms of an agreement when predefined conditions are met. This programmability transforms blockchain from a simple ledger into a global, decentralized computer that can run applications without downtime, censorship, or interference from third parties. These decentralized applications (dApps) have enabled entirely new categories of services, from decentralized finance (DeFi) to non-fungible tokens (NFTs).</p>
+                
+                <p>Transparency is another fundamental characteristic of public blockchains. All transactions are publicly visible on the blockchain, allowing anyone to audit the network's history and verify transactions independently. This transparency builds trust among participants, as they can verify the integrity of the system themselves rather than relying on statements from a central authority. However, this doesn't mean complete privacy is sacrificed—blockchains use cryptographic techniques to ensure that while transactions are transparent, the identities of participants can remain pseudonymous.</p>
+                
+                <p>Security in blockchain systems is achieved through multiple layers of protection. Cryptography ensures that transactions can only be authorized by those who possess the corresponding private keys, while consensus mechanisms prevent malicious actors from manipulating the ledger. The combination of cryptographic hashing, digital signatures, and distributed consensus creates a robust security model that has proven effective even for networks handling billions of dollars in value. This security model eliminates many of the vulnerabilities present in centralized systems, such as single points of failure and the need to trust intermediaries.</p>
+                
+                <p>Blockchain networks operate on a trustless model, meaning participants don't need to trust each other or any central authority to interact safely. Instead, they trust in the mathematical and cryptographic principles that govern the network's operations. This trustless design enables direct peer-to-peer transactions and interactions, reducing the need for intermediaries like banks, payment processors, or escrow services. The elimination of intermediaries not only reduces costs but also opens up new possibilities for financial inclusion and global commerce.</p>
+                
+                <p>The applications of blockchain technology are vast and continuously expanding. Beyond cryptocurrencies and smart contracts, blockchain is being explored for supply chain management, where it can provide transparent tracking of goods from origin to consumer. It's also being used for identity management, voting systems, intellectual property protection, and more. As the technology matures, we're seeing the emergence of specialized blockchains optimized for different use cases, from high-speed payment networks to privacy-focused systems to platforms designed for enterprise adoption.</p>
+                
+                <p>Understanding blockchain technology is essential for anyone looking to engage with the modern digital economy. Whether you're interested in investing in cryptocurrencies, building decentralized applications, or simply understanding the technological forces shaping finance and technology, blockchain knowledge provides a foundation for navigating this evolving landscape. As these networks continue to grow and develop, they represent a paradigm shift toward more open, transparent, and user-controlled digital systems that could reshape how we interact, transact, and organize value in the digital age.</p>
             </div>
         `,
         resources: [
