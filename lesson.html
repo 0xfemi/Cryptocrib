@@ -246,14 +246,9 @@
             // Update lesson info
             document.getElementById('lesson-chapter-number').textContent = `Chapter ${chapterNumber}`;
             
-            // Set subtitle if available, otherwise use lesson title
+            // Set subtitle to lesson title
             const subtitleElement = document.getElementById('lesson-subtitle');
-            if (window.LESSON_CONTENT && window.LESSON_CONTENT[lesson.id] && window.LESSON_CONTENT[lesson.id].subtitle) {
-                subtitleElement.textContent = window.LESSON_CONTENT[lesson.id].subtitle;
-            } else {
-                // Generate subtitle from lesson title or use a default
-                subtitleElement.textContent = lesson.title;
-            }
+            subtitleElement.textContent = lesson.title;
 
             // Load story content
             loadStoryContent(lesson, chapter, path);
