@@ -26,13 +26,6 @@
             <div class="lesson-content-section">
                 <!-- Lesson Header -->
                 <header class="lesson-header">
-                    <div class="lesson-breadcrumb">
-                        <a href="courses.html">Courses</a>
-                        <span>></span>
-                        <span id="lesson-path-name">Beginner</span>
-                        <span>></span>
-                        <span id="lesson-chapter-name">Chapter 1</span>
-                    </div>
                     <h1 class="lesson-main-title" id="lesson-chapter-number">Chapter 1</h1>
                     <h2 class="lesson-subtitle" id="lesson-subtitle">Secrets in Plain Sight</h2>
                 </header>
@@ -229,8 +222,6 @@
             const chapterNumber = chapterMatch ? chapterMatch[0] : '1';
 
             // Update lesson info
-            document.getElementById('lesson-path-name').textContent = path.title;
-            document.getElementById('lesson-chapter-name').textContent = chapter.title;
             document.getElementById('lesson-chapter-number').textContent = `Chapter ${chapterNumber}`;
             
             // Set subtitle if available, otherwise use lesson title

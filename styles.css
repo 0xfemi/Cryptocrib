@@ -4304,27 +4304,6 @@ html {
     margin-bottom: 48px;
 }
 
-.lesson-breadcrumb {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 24px;
-    font-family: 'Inter', sans-serif;
-}
-
-.lesson-breadcrumb a {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.lesson-breadcrumb a:hover {
-    color: #ffffff;
-}
-
-.lesson-breadcrumb span {
-    margin: 0 8px;
-}
-
 .lesson-main-title {
     font-size: 64px;
     font-weight: 700;
