@@ -4322,6 +4322,24 @@ html {
     margin-bottom: 16px;
 }
 
+.resource-summary {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.resource-summary p {
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+    text-align: justify;
+}
+
+.resource-summary p:last-child {
+    margin-bottom: 0;
+}
+
 .lesson-actions {
     margin-top: 32px;
 }

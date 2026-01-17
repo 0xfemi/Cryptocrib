@@ -272,6 +272,11 @@
                 if (window.LESSON_CONTENT && window.LESSON_CONTENT[lesson.id]) {
                     const content = window.LESSON_CONTENT[lesson.id];
                     storyText = content.story || '';
+                    
+                    // Add resource summary if available
+                    if (content.resourceSummary) {
+                        storyText += content.resourceSummary;
+                    }
                 } else {
                     // Fallback to generated content
                     storyText = generateStoryContent(lesson, chapter, path);
