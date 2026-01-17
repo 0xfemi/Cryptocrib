@@ -7,12 +7,19 @@ const LESSON_CONTENT = {
         title: 'What is Blockchain?',
         story: `
             <div class="story-paragraph">
-                <p>Blockchain is a shared digital record that stores transactions securely across many computer, instead of one company controlling it, everyone on the network helps keep it running.</p>
-                <p>Information is saved in blocks that are linked together, making it very hard to change or fake.</p>
-                <p>This system is secure because it uses cryptography and rules that everyone follows.</p>
-                <p>Bitcoin was the first use of blockchain, allowing people to send money without banks.</p>
-                <p>Ethereum later added smart contracts, which are programs that run automatically on the blockchain.</p>
-                <p>Overall, blockchain helps people exchange value online in a safe, open, and trusted way.</p>
+                <p>Blockchain is a shared digital record that stores transactions<br>
+                securely across many computer, instead of one company controlling it,<br>
+                everyone on the network helps keep it running.</p>
+                <p>Information is saved in blocks that are linked together,<br>
+                making it very hard to change or fake.</p>
+                <p>This system is secure because it uses cryptography<br>
+                and rules that everyone follows.</p>
+                <p>Bitcoin was the first use of blockchain,<br>
+                allowing people to send money without banks.</p>
+                <p>Ethereum later added smart contracts, which are programs<br>
+                that run automatically on the blockchain.</p>
+                <p>Overall, blockchain helps people exchange value online<br>
+                in a safe, open, and trusted way.</p>
             </div>
         `,
         resources: [
