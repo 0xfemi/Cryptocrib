@@ -4150,6 +4150,81 @@ html {
     color: #999999;
 }
 
+/* Challenge Item in Challenges Tab */
+.challenge-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    transition: all 0.2s ease;
+}
+
+.challenge-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.challenge-icon {
+    font-size: 32px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.challenge-content {
+    flex: 1;
+}
+
+.challenge-content h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 8px 0;
+}
+
+.challenge-content p {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+}
+
+.challenge-status {
+    display: flex;
+    align-items: center;
+}
+
+.btn-start-challenge {
+    padding: 12px 24px;
+    background: #ffffff;
+    color: #000000;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-start-challenge:hover {
+    background: #f0f0f0;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-start-challenge:active {
+    transform: translateY(0);
+}
+
 /* ============================================
    LESSON PAGE STYLES (SavingSatoshi Inspired)
    ============================================ */
@@ -4669,6 +4744,156 @@ html {
 
 .btn-continue-lesson:hover {
     background: #00ca8d;
+}
+
+/* Lesson Resources Section */
+.lesson-resources {
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.resources-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 20px 0;
+}
+
+.resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.resource-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all 0.2s ease;
+}
+
+.resource-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.resource-icon {
+    font-size: 24px;
+    margin-bottom: 4px;
+}
+
+.resource-content {
+    flex: 1;
+}
+
+.resource-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 8px 0;
+}
+
+.resource-description {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 8px 0;
+    line-height: 1.5;
+}
+
+.resource-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.resource-source {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 4px 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.resource-link {
+    padding: 10px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.resource-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Quiz Feedback */
+.feedback-correct {
+    color: #00ffb2;
+    font-weight: 500;
+    padding: 12px;
+    background: rgba(0, 255, 178, 0.1);
+    border-radius: 8px;
+}
+
+.feedback-incorrect {
+    color: #ff5f56;
+    font-weight: 500;
+    padding: 12px;
+    background: rgba(255, 95, 86, 0.1);
+    border-radius: 8px;
+}
+
+/* Quiz Complete Screen */
+.quiz-complete {
+    text-align: center;
+    padding: 40px;
+}
+
+.quiz-complete-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+}
+
+.quiz-complete h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 24px 0;
+}
+
+.quiz-score {
+    margin: 24px 0;
+}
+
+.score-value {
+    font-size: 48px;
+    font-weight: 700;
+    color: #00ffb2;
+    margin-bottom: 8px;
+}
+
+.score-percentage {
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.quiz-complete p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0 0 24px 0;
 }
 
 .hidden {

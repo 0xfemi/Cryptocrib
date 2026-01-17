@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="styles.css">
     <script src="curriculum.js"></script>
     <script src="dashboard-enhancements.js"></script>
+    <script src="lesson-content.js"></script>
 </head>
 <body class="lesson-body">
     <!-- Lesson Container -->
@@ -40,6 +41,12 @@
             <div class="lesson-tab-content active" id="content-info">
                 <div class="lesson-story-content" id="lesson-story">
                     <!-- Story content loaded dynamically -->
+                </div>
+                <div class="lesson-resources" id="lesson-resources">
+                    <h3 class="resources-title">Recommended Resources</h3>
+                    <div class="resources-grid" id="resources-grid">
+                        <!-- Resources loaded dynamically -->
+                    </div>
                 </div>
                 <div class="lesson-actions">
                     <button class="btn-start-lesson" id="btn-start-lesson">Start lesson</button>
@@ -166,9 +173,12 @@
             window.CURRICULUM = CURRICULUM;
         }
 
-        // Initialize lesson page
+            // Initialize lesson page
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
+            
+            // Make urlParams available globally for quiz completion
+            window.urlParams = urlParams;
             const pathId = urlParams.get('path') || 'beginner';
             const chapterId = urlParams.get('chapter') || '';
             const lessonId = urlParams.get('lesson') || '';
@@ -251,19 +261,63 @@
             // Setup terminal
             setupTerminal(lesson);
 
-            // Setup quiz
-            setupQuiz(lesson);
+            // Setup quiz - will be initialized when lesson starts
+            // Don't call setupQuiz here, it will be called when user starts the lesson
 
             function loadStoryContent(lesson, chapter, path) {
                 const storyContent = document.getElementById('lesson-story');
-                // Generate story content based on lesson
-                const storyText = generateStoryContent(lesson, chapter, path);
+                let storyText = '';
+                
+                // Check if we have content for this lesson
+                if (window.LESSON_CONTENT && window.LESSON_CONTENT[lesson.id]) {
+                    const content = window.LESSON_CONTENT[lesson.id];
+                    storyText = content.story || '';
+                } else {
+                    // Fallback to generated content
+                    storyText = generateStoryContent(lesson, chapter, path);
+                }
+                
                 storyContent.innerHTML = storyText;
+                
+                // Load resources if available
+                if (window.LESSON_CONTENT && window.LESSON_CONTENT[lesson.id] && window.LESSON_CONTENT[lesson.id].resources) {
+                    loadResources(window.LESSON_CONTENT[lesson.id].resources);
+                }
+            }
+
+            function loadResources(resources) {
+                const resourcesGrid = document.getElementById('resources-grid');
+                if (!resourcesGrid) return;
+                
+                if (resources.length === 0) {
+                    document.getElementById('lesson-resources').style.display = 'none';
+                    return;
+                }
+                
+                let html = '';
+                resources.forEach(resource => {
+                    html += `
+                        <div class="resource-card">
+                            <div class="resource-icon">🔗</div>
+                            <div class="resource-content">
+                                <h4 class="resource-title">${resource.title}</h4>
+                                <p class="resource-description">${resource.description}</p>
+                                <div class="resource-meta">
+                                    <span class="resource-source">${resource.source}</span>
+                                </div>
+                            </div>
+                            <a href="${resource.url}" target="_blank" rel="noopener noreferrer" class="resource-link">
+                                Visit Resource →
+                            </a>
+                        </div>
+                    `;
+                });
+                
+                resourcesGrid.innerHTML = html;
             }
 
             function generateStoryContent(lesson, chapter, path) {
-                // This would normally come from a content API or database
-                // For now, generate placeholder content
+                // Fallback content generator
                 return `
                     <div class="story-paragraph">
                         <p>Welcome to ${lesson.title}!</p>
@@ -287,24 +341,31 @@
                             <p>${lesson.type.charAt(0).toUpperCase() + lesson.type.slice(1)} • ${lesson.duration} min • +${lesson.xp} XP</p>
                         </div>
                         <div class="challenge-status">
-                            <button class="btn-start-challenge" onclick="startLesson()">Start</button>
+                            <button class="btn-start-challenge" onclick="viewLessonDetails()">Start</button>
                         </div>
                     </div>
                 `;
             }
+            
+            function viewLessonDetails() {
+                // Switch to Info tab to show complete details
+                document.getElementById('tab-info').click();
+                // Scroll to top of lesson content
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            
+            // Make viewLessonDetails available globally
+            window.viewLessonDetails = viewLessonDetails;
 
             function startLesson(lesson) {
-                // Hide story content, show appropriate section
-                document.getElementById('content-info').classList.remove('active');
-                document.getElementById('tab-info').classList.remove('active');
-                document.getElementById('content-challenges').classList.add('active');
-                document.getElementById('tab-challenges').classList.add('active');
-
+                // Always show quiz for all lesson types (users can take quiz after reading/learning)
+                // Code/challenge lessons will have quiz AND code editor
+                document.getElementById('quiz-section').classList.remove('hidden');
+                setupQuiz(lesson);
+                
+                // Also show code editor if it's a code/challenge lesson
                 if (lesson.type === 'code' || lesson.type === 'challenge') {
                     document.getElementById('code-editor-section').classList.remove('hidden');
-                } else if (lesson.type === 'interactive') {
-                    // Show quiz or interactive content
-                    document.getElementById('quiz-section').classList.remove('hidden');
                 }
             }
 
@@ -393,18 +454,156 @@
                 terminalContent.scrollTop = terminalContent.scrollHeight;
             }
 
-            function setupQuiz(lesson) {
-                // Generate quiz questions (in production, from API/database)
-                const questions = [
-                    {
-                        question: 'What is blockchain?',
-                        options: ['A distributed ledger', 'A cryptocurrency', 'A programming language', 'A database'],
-                        correct: 0
-                    }
-                ];
+            let currentQuiz = null;
+            let currentQuestionIndex = 0;
+            let quizScore = 0;
 
-                // Setup quiz UI
-                // This would be populated with actual quiz data
+            function setupQuiz(lesson) {
+                // Check if lesson has quiz content
+                if (window.LESSON_CONTENT && window.LESSON_CONTENT[lesson.id] && window.LESSON_CONTENT[lesson.id].quiz) {
+                    currentQuiz = window.LESSON_CONTENT[lesson.id].quiz;
+                } else {
+                    // Default quiz if no content available
+                    currentQuiz = [
+                        {
+                            question: 'What is blockchain?',
+                            options: ['A distributed ledger', 'A cryptocurrency', 'A programming language', 'A database'],
+                            correct: 0,
+                            explanation: 'Blockchain is a distributed ledger technology that maintains records across multiple nodes.'
+                        }
+                    ];
+                }
+                
+                currentQuestionIndex = 0;
+                quizScore = 0;
+                
+                // Load first question
+                loadQuizQuestion();
+            }
+
+            function loadQuizQuestion() {
+                if (!currentQuiz || currentQuestionIndex >= currentQuiz.length) {
+                    // Quiz completed
+                    completeQuiz();
+                    return;
+                }
+
+                const question = currentQuiz[currentQuestionIndex];
+                const quizQuestion = document.getElementById('quiz-question');
+                const quizOptions = document.getElementById('quiz-options');
+                const quizFeedback = document.getElementById('quiz-feedback');
+                const submitBtn = document.getElementById('btn-submit-quiz');
+                const nextBtn = document.getElementById('btn-next-question');
+
+                // Reset UI
+                quizQuestion.textContent = question.question;
+                quizOptions.innerHTML = '';
+                quizFeedback.classList.add('hidden');
+                submitBtn.classList.remove('hidden');
+                nextBtn.classList.add('hidden');
+
+                // Create options
+                question.options.forEach((option, index) => {
+                    const optionEl = document.createElement('div');
+                    optionEl.className = 'quiz-option';
+                    optionEl.textContent = option;
+                    optionEl.dataset.index = index;
+                    optionEl.addEventListener('click', function() {
+                        // Remove selection from all options
+                        document.querySelectorAll('.quiz-option').forEach(opt => {
+                            opt.classList.remove('selected');
+                        });
+                        // Select this option
+                        this.classList.add('selected');
+                    });
+                    quizOptions.appendChild(optionEl);
+                });
+
+                // Setup submit button
+                submitBtn.onclick = function() {
+                    checkQuizAnswer(question);
+                };
+            }
+
+            function checkQuizAnswer(question) {
+                const selectedOption = document.querySelector('.quiz-option.selected');
+                if (!selectedOption) {
+                    alert('Please select an answer');
+                    return;
+                }
+
+                const selectedIndex = parseInt(selectedOption.dataset.index);
+                const isCorrect = selectedIndex === question.correct;
+                
+                // Show feedback
+                const quizFeedback = document.getElementById('quiz-feedback');
+                const submitBtn = document.getElementById('btn-submit-quiz');
+                const nextBtn = document.getElementById('btn-next-question');
+
+                // Mark correct/incorrect
+                document.querySelectorAll('.quiz-option').forEach((opt, index) => {
+                    if (index === question.correct) {
+                        opt.classList.add('correct');
+                    } else if (index === selectedIndex && !isCorrect) {
+                        opt.classList.add('incorrect');
+                    }
+                });
+
+                // Show feedback
+                quizFeedback.innerHTML = isCorrect 
+                    ? `<div class="feedback-correct">✓ Correct! ${question.explanation || ''}</div>`
+                    : `<div class="feedback-incorrect">✗ Incorrect. The correct answer is: ${question.options[question.correct]}. ${question.explanation || ''}</div>`;
+                quizFeedback.classList.remove('hidden');
+
+                if (isCorrect) {
+                    quizScore++;
+                    // Hide submit, show next button
+                    submitBtn.classList.add('hidden');
+                    nextBtn.classList.remove('hidden');
+                    
+                    // Setup next button
+                    nextBtn.onclick = function() {
+                        currentQuestionIndex++;
+                        loadQuizQuestion();
+                    };
+                } else {
+                    // Allow user to try again or move on
+                    submitBtn.textContent = 'Try Again';
+                    submitBtn.onclick = function() {
+                        // Reset and reload question
+                        currentQuestionIndex = currentQuestionIndex; // Keep same question
+                        loadQuizQuestion();
+                    };
+                }
+            }
+
+            function completeQuiz() {
+                const quizSection = document.getElementById('quiz-section');
+                const totalQuestions = currentQuiz.length;
+                const percentage = Math.round((quizScore / totalQuestions) * 100);
+                
+                // Get lesson info for completion
+                const urlParams = new URLSearchParams(window.location.search);
+                const pathId = urlParams.get('path');
+                const chapterId = urlParams.get('chapter');
+                const lessonId = urlParams.get('lesson');
+                
+                quizSection.innerHTML = `
+                    <div class="quiz-complete">
+                        <div class="quiz-complete-icon">🎉</div>
+                        <h2>Quiz Complete!</h2>
+                        <div class="quiz-score">
+                            <div class="score-value">${quizScore}/${totalQuestions}</div>
+                            <div class="score-percentage">${percentage}%</div>
+                        </div>
+                        <p>Great job! You scored ${percentage}% on this quiz.</p>
+                        <button class="btn-continue-lesson" onclick="window.location.href='courses.html?path=${pathId}'">Continue Learning</button>
+                    </div>
+                `;
+                
+                // Complete lesson with quiz score
+                const lesson = window.CURRICULUM[pathId].chapters.find(ch => ch.id === chapterId).lessons.find(l => l.id === lessonId);
+                window.dashboardEnhancements.completeLesson(lessonId, chapterId, pathId, lesson.xp, percentage);
             }
 
             function showSuccessModal(xp, lesson) {
