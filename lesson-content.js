@@ -163,10 +163,7 @@ const LESSON_CONTENT = {
         title: 'What is Ethereum?',
         story: `
             <div class="story-paragraph">
-                <p>Ethereum is a decentralized platform that enables smart contracts and decentralized applications (dApps) to be built and run without any downtime, fraud, control, or interference from a third party.</p>
-                <p>It features its own cryptocurrency, Ether (ETH), which is used to power applications on the network.</p>
-            </div>
-            <div class="story-paragraph">
+                <p>Ethereum is a decentralized platform that enables smart contracts and decentralized applications (dApps) to be built and run without any downtime, fraud, control, or interference from a third party. It features its own cryptocurrency, Ether (ETH), which is used to power applications on the network. Ethereum introduced the concept of smart contracts—self-executing programs that automatically enforce agreements when predefined conditions are met. This programmability transforms blockchain from a simple ledger into a global, decentralized computer capable of running applications without downtime, censorship, or third-party interference, enabling new services like DeFi and NFTs.</p>
             </div>
         `,
         resourceSummary: `
@@ -341,17 +338,7 @@ const LESSON_CONTENT = {
         title: 'Arbitrum: Advanced Optimistic Rollups',
         story: `
             <div class="story-paragraph">
-                <p>Arbitrum is a leading Ethereum Layer 2 scaling solution that uses optimistic rollups with unique fraud-proof mechanisms.</p>
-                <p>It offers low transaction costs while maintaining Ethereum's security and compatibility with existing Ethereum tools.</p>
-            </div>
-            <div class="story-paragraph">
-                <h3>Arbitrum Advantages</h3>
-                <ul>
-                    <li>Lower transaction fees</li>
-                    <li>Faster transaction processing</li>
-                    <li>Full Ethereum compatibility</li>
-                    <li>Multi-round fraud proofs</li>
-                </ul>
+                <p>Arbitrum is a leading Ethereum Layer 2 scaling solution that uses optimistic rollups with unique fraud-proof mechanisms. It offers low transaction costs while maintaining Ethereum's security and compatibility with existing Ethereum tools. The network's architecture uses sophisticated fraud-proof mechanisms that enable it to achieve the security of Ethereum Layer 1 while processing transactions at a fraction of the cost, making it economically feasible for a wide range of applications including decentralized exchanges, lending protocols, and NFT marketplaces.</p>
             </div>
         `,
         resourceSummary: `
@@ -411,18 +398,7 @@ const LESSON_CONTENT = {
         title: 'Introduction to DeFi',
         story: `
             <div class="story-paragraph">
-                <p>Decentralized Finance (DeFi) is a financial system built on blockchain networks that enables financial services without intermediaries.</p>
-                <p>DeFi applications use smart contracts to automate financial operations, making them transparent, accessible, and programmable.</p>
-            </div>
-            <div class="story-paragraph">
-                <h3>DeFi Categories</h3>
-                <ul>
-                    <li>Decentralized Exchanges (DEXs)</li>
-                    <li>Lending and Borrowing Protocols</li>
-                    <li>Yield Farming</li>
-                    <li>Stablecoins</li>
-                    <li>Derivatives</li>
-                </ul>
+                <p>Decentralized Finance (DeFi) is a financial system built on blockchain networks that enables financial services without intermediaries. DeFi applications use smart contracts to automate financial operations, making them transparent, accessible, and programmable. This trustless model enables entirely new categories of financial products and services that weren't possible with traditional finance infrastructure, including decentralized exchanges, lending and borrowing protocols, yield farming, stablecoins, and derivatives.</p>
             </div>
         `,
         resourceSummary: `
@@ -475,18 +451,7 @@ const LESSON_CONTENT = {
         title: 'Solidity Basics and Syntax',
         story: `
             <div class="story-paragraph">
-                <p>Solidity is an object-oriented programming language designed for implementing smart contracts on the Ethereum blockchain.</p>
-                <p>It's statically typed, supports inheritance, libraries, and complex user-defined types.</p>
-            </div>
-            <div class="story-paragraph">
-                <h3>Solidity Features</h3>
-                <ul>
-                    <li>Contract-oriented language</li>
-                    <li>Static typing</li>
-                    <li>Inheritance support</li>
-                    <li>Library support</li>
-                    <li>Complex user-defined types</li>
-                </ul>
+                <p>Solidity is an object-oriented programming language designed for implementing smart contracts on the Ethereum blockchain. It's statically typed, supports inheritance, libraries, and complex user-defined types. As a contract-oriented language, contracts are the fundamental building blocks of Solidity programs, similar to classes in object-oriented programming languages, containing state variables, functions, and events that execute exactly as programmed when deployed to the blockchain.</p>
             </div>
         `,
         resourceSummary: `
