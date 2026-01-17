@@ -7,19 +7,9 @@ const LESSON_CONTENT = {
         title: 'What is Blockchain?',
         story: `
             <div class="story-paragraph">
-                <p>Blockchain is a shared digital record that stores transactions<br>
-                securely across many computer, instead of one company controlling it,<br>
-                everyone on the network helps keep it running.</p>
-                <p>Information is saved in blocks that are linked together,<br>
-                making it very hard to change or fake.</p>
-                <p>This system is secure because it uses cryptography<br>
-                and rules that everyone follows.</p>
-                <p>Bitcoin was the first use of blockchain,<br>
-                allowing people to send money without banks.</p>
-                <p>Ethereum later added smart contracts, which are programs<br>
-                that run automatically on the blockchain.</p>
-                <p>Overall, blockchain helps people exchange value online<br>
-                in a safe, open, and trusted way.</p>
+                <p>Blockchain is a shared digital record that stores transactions securely across many computer, instead of one company controlling it, everyone on the network helps keep it running. Information is saved in blocks that are linked together, making it very hard to change or fake. This system is secure because it uses cryptography and rules that everyone follows.</p>
+                
+                <p>Bitcoin was the first use of blockchain, allowing people to send money without banks. Ethereum later added smart contracts, which are programs that run automatically on the blockchain. Overall, blockchain helps people exchange value online in a safe, open, and trusted way.</p>
             </div>
         `,
         resources: [
@@ -61,17 +51,7 @@ const LESSON_CONTENT = {
         title: 'Distributed Ledgers Explained',
         story: `
             <div class="story-paragraph">
-                <p>A distributed ledger is a database that is consensually shared and synchronized across multiple sites, institutions, or geographies.</p>
-                <p>Unlike traditional centralized databases, distributed ledgers have no central data store or administration functionality.</p>
-            </div>
-            <div class="story-paragraph">
-                <h3>Benefits of Distributed Ledgers</h3>
-                <ul>
-                    <li>Increased transparency and auditability</li>
-                    <li>Reduced costs by eliminating middlemen</li>
-                    <li>Enhanced security through decentralization</li>
-                    <li>Faster transaction processing</li>
-                </ul>
+                <p>A distributed ledger is a database that is consensually shared and synchronized across multiple sites, institutions, or geographies. Unlike traditional centralized databases, distributed ledgers have no central data store or administration functionality. This architecture ensures that no single point of failure can compromise the entire system, and participants can verify transactions independently without relying on a trusted third party. The distributed nature means that even if many nodes fail or are compromised, the network continues to operate reliably as long as a sufficient number of nodes remain active.</p>
             </div>
         `,
         resourceSummary: `
@@ -124,17 +104,7 @@ const LESSON_CONTENT = {
         title: 'Bitcoin Whitepaper Overview',
         story: `
             <div class="story-paragraph">
-                <p>The Bitcoin whitepaper, titled "Bitcoin: A Peer-to-Peer Electronic Cash System," was published by Satoshi Nakamoto in 2008.</p>
-                <p>It introduced the first successful implementation of blockchain technology and solved the double-spending problem without requiring a trusted authority.</p>
-            </div>
-            <div class="story-paragraph">
-                <h3>Key Innovations</h3>
-                <ul>
-                    <li>Proof of Work consensus mechanism</li>
-                    <li>Merkle trees for efficient verification</li>
-                    <li>UTXO (Unspent Transaction Output) model</li>
-                    <li>Cryptographic proof instead of trust</li>
-                </ul>
+                <p>The Bitcoin whitepaper, titled "Bitcoin: A Peer-to-Peer Electronic Cash System," was published by Satoshi Nakamoto in 2008. It introduced the first successful implementation of blockchain technology and solved the double-spending problem without requiring a trusted authority. This breakthrough was achieved through a combination of cryptographic proof, timestamped blocks, and a distributed consensus mechanism that allows network participants to agree on the validity of transactions without needing to trust each other. The whitepaper proposed key innovations including Proof of Work consensus mechanism, Merkle trees for efficient verification, the UTXO model, and using cryptographic proof instead of trust.</p>
             </div>
         `,
         resourceSummary: `
@@ -197,13 +167,6 @@ const LESSON_CONTENT = {
                 <p>It features its own cryptocurrency, Ether (ETH), which is used to power applications on the network.</p>
             </div>
             <div class="story-paragraph">
-                <h3>Ethereum Capabilities</h3>
-                <ul>
-                    <li>Smart contract execution</li>
-                    <li>Decentralized application hosting</li>
-                    <li>Token creation (ERC-20, ERC-721, etc.)</li>
-                    <li>Decentralized finance (DeFi) applications</li>
-                </ul>
             </div>
         `,
         resourceSummary: `
@@ -325,17 +288,7 @@ const LESSON_CONTENT = {
         title: 'Optimism: Optimistic Rollups',
         story: `
             <div class="story-paragraph">
-                <p>Optimism is an Ethereum Layer 2 scaling solution that uses optimistic rollups to achieve faster and cheaper transactions.</p>
-                <p>It processes transactions off-chain and posts compressed data back to Ethereum, reducing costs while maintaining security.</p>
-            </div>
-            <div class="story-paragraph">
-                <h3>How Optimistic Rollups Work</h3>
-                <ul>
-                    <li>Transactions are executed off-chain</li>
-                    <li>State changes are posted to Ethereum</li>
-                    <li>Fraud proofs ensure security</li>
-                    <li>7-day challenge period for disputes</li>
-                </ul>
+                <p>Optimism is an Ethereum Layer 2 scaling solution that uses optimistic rollups to achieve faster and cheaper transactions while maintaining Ethereum's security guarantees. It processes transactions off-chain and posts compressed data back to Ethereum, reducing costs while maintaining security. The name "optimistic rollups" comes from the optimistic assumption that all state transitions posted to Ethereum are valid unless proven otherwise, allowing the system to scale efficiently while maintaining strong security properties through a seven-day challenge period where anyone can dispute fraudulent transactions.</p>
             </div>
         `,
         resourceSummary: `

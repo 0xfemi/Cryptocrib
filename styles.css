@@ -4382,7 +4382,8 @@ html {
 }
 
 .story-paragraph p {
-    margin-bottom: 8px;
+    margin-bottom: 16px;
+    text-align: justify;
 }
 
 .resource-summary {
