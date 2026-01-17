@@ -247,7 +247,7 @@
                                 </div>
                                 <span class="continue-progress-text">50%</span>
                             </div>
-                            <button class="btn-continue-lesson" onclick="window.location.href='lesson.html?path=beginner&chapter=ch1-blockchain-basics&lesson=1-3'">Continue →</button>
+                            <button class="btn-continue-lesson" onclick="window.location.href='lesson.html#/beginner/ch1-blockchain-basics/1-3'">Continue →</button>
                         </div>
                     </div>
                 </section>
@@ -522,8 +522,8 @@
                                                 <span class="path-progress-text">${Math.round(progressPercent)}% Complete</span>
                                             </div>
                                             <div class="path-actions">
-                                                <button class="btn-path-continue" onclick="window.location.href='courses.html?path=${pathId}'">Continue →</button>
-                                                <button class="btn-path-details" onclick="window.location.href='courses.html?path=${pathId}'">View Details</button>
+                                                <button class="btn-path-continue" onclick="window.location.href='courses.html#/${pathId}'">Continue →</button>
+                                                <button class="btn-path-details" onclick="window.location.href='courses.html#/${pathId}'">View Details</button>
                                             </div>
                                         ` : `
                                             <p class="path-lock-text">Complete ${path.unlockedBy ? window.CURRICULUM[path.unlockedBy].title : 'previous path'} to Unlock</p>

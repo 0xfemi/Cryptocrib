@@ -172,13 +172,35 @@
 
             // Initialize lesson page
         document.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
+            // Parse URL - support both new clean format and old query format
+            let pathId, chapterId, lessonId;
             
-            // Make urlParams available globally for quiz completion
-            window.urlParams = urlParams;
-            const pathId = urlParams.get('path') || 'beginner';
-            const chapterId = urlParams.get('chapter') || '';
-            const lessonId = urlParams.get('lesson') || '';
+            // Check for hash-based clean URL: #/beginner/ch1-blockchain-basics/1-1
+            const hash = window.location.hash;
+            if (hash && hash.startsWith('#/')) {
+                const parts = hash.substring(2).split('/');
+                if (parts.length >= 3) {
+                    pathId = parts[0];
+                    chapterId = parts[1];
+                    lessonId = parts[2];
+                }
+            }
+            
+            // Fallback to query parameters for backward compatibility
+            if (!pathId || !chapterId || !lessonId) {
+                const urlParams = new URLSearchParams(window.location.search);
+                pathId = urlParams.get('path') || 'beginner';
+                chapterId = urlParams.get('chapter') || '';
+                lessonId = urlParams.get('lesson') || '';
+                
+                // Update URL to clean format if using old format
+                if (pathId && chapterId && lessonId && window.location.hash !== `#/${pathId}/${chapterId}/${lessonId}`) {
+                    window.history.replaceState(null, '', `lesson.html#/${pathId}/${chapterId}/${lessonId}`);
+                }
+            }
+            
+            // Make available globally for quiz completion
+            window.urlParams = { path: pathId, chapter: chapterId, lesson: lessonId };
 
             if (!window.CURRICULUM || !window.CURRICULUM[pathId]) {
                 console.error('Path not found');
@@ -566,11 +588,10 @@
                 const totalQuestions = currentQuiz.length;
                 const percentage = Math.round((quizScore / totalQuestions) * 100);
                 
-                // Get lesson info for completion
-                const urlParams = new URLSearchParams(window.location.search);
-                const pathId = urlParams.get('path');
-                const chapterId = urlParams.get('chapter');
-                const lessonId = urlParams.get('lesson');
+                // Get lesson info for completion - use global urlParams
+                const pathId = window.urlParams?.path || 'beginner';
+                const chapterId = window.urlParams?.chapter || '';
+                const lessonId = window.urlParams?.lesson || '';
                 
                 quizSection.innerHTML = `
                     <div class="quiz-complete">
@@ -581,7 +602,7 @@
                             <div class="score-percentage">${percentage}%</div>
                         </div>
                         <p>Great job! You scored ${percentage}% on this quiz.</p>
-                        <button class="btn-continue-lesson" onclick="window.location.href='courses.html?path=${pathId}'">Continue Learning</button>
+                        <button class="btn-continue-lesson" onclick="window.location.href='courses.html#/${pathId}'">Continue Learning</button>
                     </div>
                 `;
                 
@@ -595,18 +616,17 @@
                 document.getElementById('success-xp-amount').textContent = `+${xp}`;
                 modal.classList.remove('hidden');
 
-                // Complete lesson
-                const urlParams = new URLSearchParams(window.location.search);
-                const pathId = urlParams.get('path');
-                const chapterId = urlParams.get('chapter');
-                const lessonId = urlParams.get('lesson');
+                // Complete lesson - use global urlParams
+                const pathId = window.urlParams?.path || 'beginner';
+                const chapterId = window.urlParams?.chapter || '';
+                const lessonId = window.urlParams?.lesson || '';
 
                 window.dashboardEnhancements.completeLesson(lessonId, chapterId, pathId, xp, 100);
 
                 // Setup continue button
                 document.getElementById('btn-continue-lesson').addEventListener('click', function() {
                     // Navigate to next lesson or back to courses
-                    window.location.href = 'courses.html?path=' + pathId;
+                    window.location.href = 'courses.html#/' + pathId;
                 });
 
                 // Setup share button

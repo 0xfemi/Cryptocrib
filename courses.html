@@ -126,8 +126,23 @@
         // Initialize courses page
         document.addEventListener('DOMContentLoaded', function() {
             // Get active path from URL or default to beginner
-            const urlParams = new URLSearchParams(window.location.search);
-            const activePathId = urlParams.get('path') || 'beginner';
+            // Parse URL - support both hash-based and query parameters
+            let activePathId = 'beginner';
+            const hash = window.location.hash;
+            if (hash && hash.startsWith('#/')) {
+                const parts = hash.substring(2).split('/');
+                if (parts.length >= 1 && parts[0]) {
+                    activePathId = parts[0];
+                }
+            } else {
+                // Fallback to query parameters
+                const urlParams = new URLSearchParams(window.location.search);
+                activePathId = urlParams.get('path') || 'beginner';
+                // Update URL to clean format
+                if (activePathId && window.location.hash !== `#/${activePathId}`) {
+                    window.history.replaceState(null, '', `courses.html#/${activePathId}`);
+                }
+            }
 
             // Initialize dashboard enhancements
             if (!window.dashboardEnhancements) {
@@ -174,7 +189,7 @@
                             <div class="lock-icon">🔒</div>
                             <h2>Path Locked</h2>
                             <p>Complete the ${path.unlockedBy ? window.CURRICULUM[path.unlockedBy].title : 'previous path'} to unlock this path.</p>
-                            <a href="courses.html?path=${path.unlockedBy || 'beginner'}" class="btn-primary">Go to ${path.unlockedBy ? window.CURRICULUM[path.unlockedBy].title : 'Beginner Path'}</a>
+                            <a href="courses.html#/${path.unlockedBy || 'beginner'}" class="btn-primary">Go to ${path.unlockedBy ? window.CURRICULUM[path.unlockedBy].title : 'Beginner Path'}</a>
                         </div>
                     `;
                     return;
@@ -259,7 +274,7 @@
 
                                     return `
                                         <div class="lesson-item ${isCompleted ? 'completed' : ''}" 
-                                             onclick="window.location.href='lesson.html?path=${pathId}&chapter=${chapter.id}&lesson=${lesson.id}'">
+                                             onclick="window.location.href='lesson.html#/${pathId}/${chapter.id}/${lesson.id}'">
                                             <div class="lesson-number">${lessonIndex + 1}</div>
                                             <div class="lesson-content">
                                                 <div class="lesson-header">
