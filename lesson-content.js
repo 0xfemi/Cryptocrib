@@ -7,17 +7,12 @@ const LESSON_CONTENT = {
         title: 'What is Blockchain?',
         story: `
             <div class="story-paragraph">
-                <p>Blockchain is a distributed ledger technology that maintains a continuously growing list of records, called blocks, which are linked and secured using cryptography.</p>
-                <p>Each block typically contains a cryptographic hash of the previous block, a timestamp, and transaction data. By design, a blockchain is resistant to modification of its data.</p>
-            </div>
-            <div class="story-paragraph">
-                <h3>Key Concepts</h3>
-                <ul>
-                    <li><strong>Decentralization:</strong> No central authority controls the blockchain</li>
-                    <li><strong>Immutability:</strong> Once data is recorded, it cannot be altered</li>
-                    <li><strong>Transparency:</strong> All participants can view the transaction history</li>
-                    <li><strong>Security:</strong> Cryptographic hashing ensures data integrity</li>
-                </ul>
+                <p>Blockchain is a shared digital record that stores transactions securely across many computer, instead of one company controlling it, everyone on the network helps keep it running.</p>
+                <p>Information is saved in blocks that are linked together, making it very hard to change or fake.</p>
+                <p>This system is secure because it uses cryptography and rules that everyone follows.</p>
+                <p>Bitcoin was the first use of blockchain, allowing people to send money without banks.</p>
+                <p>Ethereum later added smart contracts, which are programs that run automatically on the blockchain.</p>
+                <p>Overall, blockchain helps people exchange value online in a safe, open, and trusted way.</p>
             </div>
         `,
         resourceSummary: `
