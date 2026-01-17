@@ -15,48 +15,52 @@
 <body class="lesson-body">
     <!-- Lesson Container -->
     <div class="lesson-container" id="lesson-container">
-        <!-- Lesson Header -->
-        <header class="lesson-header">
-            <div class="lesson-header-content">
-                <div class="lesson-breadcrumb">
-                    <a href="courses.html">Courses</a>
-                    <span>></span>
-                    <span id="lesson-path-name">Beginner</span>
-                    <span>></span>
-                    <span id="lesson-chapter-name">Chapter 1</span>
-                </div>
-                <h1 class="lesson-main-title" id="lesson-title">Loading...</h1>
+        <!-- Split Layout: Image Left, Content Right -->
+        <div class="lesson-split-layout">
+            <!-- Left Side: Background Image -->
+            <div class="lesson-image-section" id="lesson-image-section">
+                <!-- Background image applied via CSS -->
             </div>
-        </header>
 
-        <!-- Lesson Navigation Tabs -->
-        <div class="lesson-tabs">
-            <button class="lesson-tab active" data-tab="info" id="tab-info">Info</button>
-            <button class="lesson-tab" data-tab="challenges" id="tab-challenges">Challenges</button>
-        </div>
-
-        <!-- Lesson Content -->
-        <div class="lesson-content-wrapper">
-            <!-- Info Tab Content -->
-            <div class="lesson-tab-content active" id="content-info">
-                <div class="lesson-story-content" id="lesson-story">
-                    <!-- Story content loaded dynamically -->
-                </div>
-                <div class="lesson-resources" id="lesson-resources">
-                    <h3 class="resources-title">Recommended Resources</h3>
-                    <div class="resources-grid" id="resources-grid">
-                        <!-- Resources loaded dynamically -->
+            <!-- Right Side: Content Area -->
+            <div class="lesson-content-section">
+                <!-- Lesson Header -->
+                <header class="lesson-header">
+                    <div class="lesson-breadcrumb">
+                        <a href="courses.html">Courses</a>
+                        <span>></span>
+                        <span id="lesson-path-name">Beginner</span>
+                        <span>></span>
+                        <span id="lesson-chapter-name">Chapter 1</span>
                     </div>
-                </div>
-                <div class="lesson-actions">
-                    <button class="btn-start-lesson" id="btn-start-lesson">Start lesson</button>
-                </div>
-            </div>
+                    <h1 class="lesson-main-title" id="lesson-chapter-number">Chapter 1</h1>
+                    <h2 class="lesson-subtitle" id="lesson-subtitle">Secrets in Plain Sight</h2>
+                </header>
 
-            <!-- Challenges Tab Content -->
-            <div class="lesson-tab-content" id="content-challenges">
-                <div class="challenges-list" id="challenges-list">
-                    <!-- Challenges loaded dynamically -->
+                <!-- Lesson Navigation Tabs -->
+                <div class="lesson-tabs">
+                    <button class="lesson-tab active" data-tab="info" id="tab-info">Info</button>
+                    <button class="lesson-tab" data-tab="challenges" id="tab-challenges">Challenges</button>
+                </div>
+
+                <!-- Lesson Content -->
+                <div class="lesson-content-wrapper">
+                    <!-- Info Tab Content -->
+                    <div class="lesson-tab-content active" id="content-info">
+                        <div class="lesson-story-content" id="lesson-story">
+                            <!-- Story content loaded dynamically -->
+                        </div>
+                        <div class="lesson-actions">
+                            <button class="btn-start-lesson" id="btn-start-lesson">Start chapter</button>
+                        </div>
+                    </div>
+
+                    <!-- Challenges Tab Content -->
+                    <div class="lesson-tab-content" id="content-challenges">
+                        <div class="challenges-list" id="challenges-list">
+                            <!-- Challenges loaded dynamically -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -206,21 +210,37 @@
                 window.dashboardEnhancements = new DashboardEnhancements();
             }
 
-            // Set gradient background based on chapter
-            const gradients = {
-                'ch1-blockchain-basics': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                'ch2-bitcoin': 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-                'ch3-wallets': 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-                'ch4-ethereum-basics': 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
-                'ch5-layer2': 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'
+            // Set background image based on chapter
+            const chapterImages = {
+                'ch1-blockchain-basics': 'chapter-1',
+                'ch2-bitcoin': 'chapter-2',
+                'ch3-wallets': 'chapter-3',
+                'ch4-ethereum-basics': 'chapter-4',
+                'ch5-layer2': 'chapter-5'
             };
-            const gradient = gradients[chapterId] || 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-            document.body.style.background = gradient;
+            const imageClass = chapterImages[chapterId] || 'chapter-1';
+            const imageSection = document.getElementById('lesson-image-section');
+            if (imageSection) {
+                imageSection.className = 'lesson-image-section ' + imageClass;
+            }
+
+            // Get chapter number from chapter title (e.g., "Chapter 1" -> "1")
+            const chapterMatch = chapter.title.match(/\d+/);
+            const chapterNumber = chapterMatch ? chapterMatch[0] : '1';
 
             // Update lesson info
-            document.getElementById('lesson-title').textContent = lesson.title;
             document.getElementById('lesson-path-name').textContent = path.title;
             document.getElementById('lesson-chapter-name').textContent = chapter.title;
+            document.getElementById('lesson-chapter-number').textContent = `Chapter ${chapterNumber}`;
+            
+            // Set subtitle if available, otherwise use lesson title
+            const subtitleElement = document.getElementById('lesson-subtitle');
+            if (window.LESSON_CONTENT && window.LESSON_CONTENT[lesson.id] && window.LESSON_CONTENT[lesson.id].subtitle) {
+                subtitleElement.textContent = window.LESSON_CONTENT[lesson.id].subtitle;
+            } else {
+                // Generate subtitle from lesson title or use a default
+                subtitleElement.textContent = lesson.title;
+            }
 
             // Load story content
             loadStoryContent(lesson, chapter, path);
@@ -250,8 +270,12 @@
                 });
             });
 
-            // Setup start lesson button
-            document.getElementById('btn-start-lesson').addEventListener('click', function() {
+            // Setup start lesson button - update text with chapter number
+            const startButton = document.getElementById('btn-start-lesson');
+            const chapterMatchFinal = chapter.title.match(/\d+/);
+            const chapterNumberFinal = chapterMatchFinal ? chapterMatchFinal[0] : '1';
+            startButton.textContent = `Start chapter ${chapterNumberFinal}`;
+            startButton.addEventListener('click', function() {
                 startLesson(lesson);
             });
 
@@ -283,42 +307,6 @@
                 }
                 
                 storyContent.innerHTML = storyText;
-                
-                // Load resources if available
-                if (window.LESSON_CONTENT && window.LESSON_CONTENT[lesson.id] && window.LESSON_CONTENT[lesson.id].resources) {
-                    loadResources(window.LESSON_CONTENT[lesson.id].resources);
-                }
-            }
-
-            function loadResources(resources) {
-                const resourcesGrid = document.getElementById('resources-grid');
-                if (!resourcesGrid) return;
-                
-                if (resources.length === 0) {
-                    document.getElementById('lesson-resources').style.display = 'none';
-                    return;
-                }
-                
-                let html = '';
-                resources.forEach(resource => {
-                    html += `
-                        <div class="resource-card">
-                            <div class="resource-icon">🔗</div>
-                            <div class="resource-content">
-                                <h4 class="resource-title">${resource.title}</h4>
-                                <p class="resource-description">${resource.description}</p>
-                                <div class="resource-meta">
-                                    <span class="resource-source">${resource.source}</span>
-                                </div>
-                            </div>
-                            <a href="${resource.url}" target="_blank" rel="noopener noreferrer" class="resource-link">
-                                Visit Resource →
-                            </a>
-                        </div>
-                    `;
-                });
-                
-                resourcesGrid.innerHTML = html;
             }
 
             function generateStoryContent(lesson, chapter, path) {

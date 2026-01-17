@@ -4230,29 +4230,95 @@ html {
    ============================================ */
 
 .lesson-body {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #000000;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 .lesson-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 24px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.lesson-split-layout {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+.lesson-image-section {
+    flex: 1;
+    min-width: 50%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+/* Default background image - futuristic cityscape */
+.lesson-image-section {
+    background-image: url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1600&q=90');
+    background-position: center right;
+}
+
+/* Chapter-specific background images - all futuristic/cyberpunk city scenes */
+.lesson-image-section.chapter-1 {
+    background-image: url('https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=1600&q=90');
+    background-position: center right;
+}
+
+.lesson-image-section.chapter-2 {
+    background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1600&q=90');
+    background-position: center right;
+}
+
+.lesson-image-section.chapter-3 {
+    background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=90');
+    background-position: center right;
+}
+
+.lesson-image-section.chapter-4 {
+    background-image: url('https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=1600&q=90');
+    background-position: center right;
+}
+
+.lesson-image-section.chapter-5 {
+    background-image: url('https://images.unsplash.com/photo-1563089145-599997674d42?w=1600&q=90');
+    background-position: center right;
+}
+
+.lesson-content-section {
+    flex: 1;
+    min-width: 50%;
+    background: #0a1929;
+    overflow-y: auto;
+    padding: 60px 80px;
+    display: flex;
+    flex-direction: column;
 }
 
 .lesson-header {
-    margin-bottom: 32px;
+    margin-bottom: 48px;
 }
 
 .lesson-breadcrumb {
     font-size: 14px;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 16px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 24px;
+    font-family: 'Inter', sans-serif;
 }
 
 .lesson-breadcrumb a {
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.lesson-breadcrumb a:hover {
+    color: #ffffff;
 }
 
 .lesson-breadcrumb span {
@@ -4260,11 +4326,22 @@ html {
 }
 
 .lesson-main-title {
-    font-size: 48px;
+    font-size: 64px;
     font-weight: 700;
     color: #ffffff;
+    margin: 0 0 16px 0;
+    font-family: 'Inter', sans-serif;
+    line-height: 1.1;
+}
+
+.lesson-subtitle {
+    font-size: 28px;
+    font-weight: 400;
+    color: #ffffff;
     margin: 0;
+    font-family: 'DM Sans', serif;
     font-style: italic;
+    opacity: 0.9;
 }
 
 .lesson-tabs {
@@ -4295,13 +4372,17 @@ html {
     color: #ffffff;
 }
 
+.lesson-content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
 .lesson-tab-content {
     display: none;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 12px;
-    padding: 40px;
-    margin-bottom: 32px;
+    flex: 1;
+    padding: 0;
+    margin: 0;
 }
 
 .lesson-tab-content.active {
@@ -4310,8 +4391,10 @@ html {
 
 .lesson-story-content {
     font-size: 18px;
-    line-height: 1.8;
-    color: #ffffff;
+    line-height: 1.9;
+    color: rgba(255, 255, 255, 0.9);
+    font-family: 'Inter', sans-serif;
+    margin-bottom: 48px;
 }
 
 .story-paragraph {
@@ -4345,7 +4428,7 @@ html {
 }
 
 .btn-start-lesson {
-    padding: 16px 32px;
+    padding: 16px 40px;
     background: #ffffff;
     color: #000000;
     border: none;
@@ -4354,11 +4437,64 @@ html {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
+    font-family: 'Inter', sans-serif;
+    min-width: 200px;
 }
 
 .btn-start-lesson:hover {
     background: #f0f0f0;
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive styles for lesson page */
+@media (max-width: 1024px) {
+    .lesson-split-layout {
+        flex-direction: column;
+    }
+    
+    .lesson-image-section {
+        height: 300px;
+        min-height: 300px;
+        flex: none;
+    }
+    
+    .lesson-content-section {
+        flex: 1;
+        padding: 40px 40px;
+        min-height: calc(100vh - 300px);
+    }
+    
+    .lesson-main-title {
+        font-size: 48px;
+    }
+    
+    .lesson-subtitle {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .lesson-content-section {
+        padding: 32px 24px;
+    }
+    
+    .lesson-main-title {
+        font-size: 36px;
+    }
+    
+    .lesson-subtitle {
+        font-size: 20px;
+    }
+    
+    .lesson-story-content {
+        font-size: 16px;
+    }
+    
+    .lesson-image-section {
+        height: 250px;
+        min-height: 250px;
+    }
 }
 
 /* Code Editor Section */
