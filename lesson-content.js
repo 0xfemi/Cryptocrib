@@ -222,17 +222,7 @@ const LESSON_CONTENT = {
         title: 'Base: Coinbase\'s L2',
         story: `
             <div class="story-paragraph">
-                <p>Base is an Ethereum Layer 2 (L2) solution built by Coinbase that aims to bring the next billion users on-chain.</p>
-                <p>It's designed to be secure, low-cost, and developer-friendly, using Optimism's OP Stack technology.</p>
-            </div>
-            <div class="story-paragraph">
-                <h3>Base Features</h3>
-                <ul>
-                    <li>Built on Optimism's OP Stack</li>
-                    <li>Low transaction fees</li>
-                    <li>Ethereum security</li>
-                    <li>Easy fiat on-ramps via Coinbase</li>
-                </ul>
+                <p>Base is an Ethereum Layer 2 (L2) solution built by Coinbase that aims to bring the next billion users on-chain. It's designed to be secure, low-cost, and developer-friendly, using Optimism's OP Stack technology. Base operates as an optimistic rollup that processes transactions off the Ethereum mainnet while posting transaction data back to Ethereum Layer 1, allowing it to handle thousands of transactions per second at a fraction of the cost while still benefiting from Ethereum's security guarantees.</p>
             </div>
         `,
         resourceSummary: `
