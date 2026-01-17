@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson – Cryptocrib Academy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000;family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="curriculum.js"></script>
+    <script src="dashboard-enhancements.js"></script>
+</head>
+<body class="lesson-body">
+    <!-- Lesson Container -->
+    <div class="lesson-container" id="lesson-container">
+        <!-- Lesson Header -->
+        <header class="lesson-header">
+            <div class="lesson-header-content">
+                <div class="lesson-breadcrumb">
+                    <a href="courses.html">Courses</a>
+                    <span>></span>
+                    <span id="lesson-path-name">Beginner</span>
+                    <span>></span>
+                    <span id="lesson-chapter-name">Chapter 1</span>
+                </div>
+                <h1 class="lesson-main-title" id="lesson-title">Loading...</h1>
+            </div>
+        </header>
+
+        <!-- Lesson Navigation Tabs -->
+        <div class="lesson-tabs">
+            <button class="lesson-tab active" data-tab="info" id="tab-info">Info</button>
+            <button class="lesson-tab" data-tab="challenges" id="tab-challenges">Challenges</button>
+        </div>
+
+        <!-- Lesson Content -->
+        <div class="lesson-content-wrapper">
+            <!-- Info Tab Content -->
+            <div class="lesson-tab-content active" id="content-info">
+                <div class="lesson-story-content" id="lesson-story">
+                    <!-- Story content loaded dynamically -->
+                </div>
+                <div class="lesson-actions">
+                    <button class="btn-start-lesson" id="btn-start-lesson">Start lesson</button>
+                </div>
+            </div>
+
+            <!-- Challenges Tab Content -->
+            <div class="lesson-tab-content" id="content-challenges">
+                <div class="challenges-list" id="challenges-list">
+                    <!-- Challenges loaded dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Editor Section (shown for code/challenge lessons) -->
+        <div class="code-editor-section hidden" id="code-editor-section">
+            <div class="code-editor-tabs">
+                <button class="code-tab active" data-lang="javascript">JavaScript</button>
+                <button class="code-tab" data-lang="python">Python</button>
+            </div>
+            <div class="code-editor-container">
+                <div class="code-editor" id="code-editor-js">
+                    <div class="code-line-numbers" id="line-numbers-js"></div>
+                    <textarea class="code-textarea" id="code-textarea-js" spellcheck="false" placeholder="// Enter your code here..."></textarea>
+                </div>
+                <div class="code-editor hidden" id="code-editor-python">
+                    <div class="code-line-numbers" id="line-numbers-python"></div>
+                    <textarea class="code-textarea" id="code-textarea-python" spellcheck="false" placeholder="# Enter your code here..."></textarea>
+                </div>
+            </div>
+            <div class="code-actions">
+                <button class="btn-run-code" id="btn-run-code">Run Code</button>
+                <button class="btn-submit-code" id="btn-submit-code">Submit</button>
+            </div>
+            <div class="code-output" id="code-output">
+                <div class="code-output-header">Output</div>
+                <div class="code-output-content" id="code-output-content"></div>
+            </div>
+        </div>
+
+        <!-- Terminal Simulator (shown for terminal challenges) -->
+        <div class="terminal-section hidden" id="terminal-section">
+            <div class="terminal-header">
+                <div class="terminal-title">Terminal</div>
+                <div class="terminal-controls">
+                    <span class="terminal-dot red"></span>
+                    <span class="terminal-dot yellow"></span>
+                    <span class="terminal-dot green"></span>
+                </div>
+            </div>
+            <div class="terminal-content" id="terminal-content">
+                <div class="terminal-line">
+                    <span class="terminal-prompt">$</span>
+                    <span class="terminal-text">Enter your commands here and press Enter...</span>
+                </div>
+            </div>
+            <div class="terminal-input-container">
+                <span class="terminal-prompt">$</span>
+                <input type="text" class="terminal-input" id="terminal-input" autocomplete="off" />
+            </div>
+        </div>
+
+        <!-- Quiz Section (shown for quiz lessons) -->
+        <div class="quiz-section hidden" id="quiz-section">
+            <div class="quiz-question" id="quiz-question">
+                <!-- Quiz question loaded dynamically -->
+            </div>
+            <div class="quiz-options" id="quiz-options">
+                <!-- Quiz options loaded dynamically -->
+            </div>
+            <div class="quiz-feedback hidden" id="quiz-feedback">
+                <!-- Feedback shown after answer -->
+            </div>
+            <div class="quiz-actions">
+                <button class="btn-submit-quiz hidden" id="btn-submit-quiz">Submit Answer</button>
+                <button class="btn-next-question hidden" id="btn-next-question">Next Question</button>
+            </div>
+        </div>
+
+        <!-- Success Modal -->
+        <div class="success-modal hidden" id="success-modal">
+            <div class="success-modal-content">
+                <div class="success-icon">✓</div>
+                <h2>Nicely done!</h2>
+                <div class="success-xp">
+                    <span class="success-xp-amount" id="success-xp-amount">+50</span>
+                    <span class="success-xp-label">XP Earned</span>
+                </div>
+                <div class="success-actions">
+                    <button class="btn-share-x" id="btn-share-x">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                        Share via X
+                    </button>
+                    <button class="btn-continue-lesson" id="btn-continue-lesson">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check authentication
+        (function() {
+            const authData = localStorage.getItem('cryptocrib_auth');
+            if (!authData) {
+                window.location.href = 'auth.html';
+                return;
+            }
+            try {
+                const auth = JSON.parse(authData);
+                if (!auth.isLoggedIn) {
+                    window.location.href = 'auth.html';
+                    return;
+                }
+            } catch (e) {
+                window.location.href = 'auth.html';
+                return;
+            }
+        })();
+
+        // Make curriculum data available globally
+        if (typeof CURRICULUM !== 'undefined') {
+            window.CURRICULUM = CURRICULUM;
+        }
+
+        // Initialize lesson page
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const pathId = urlParams.get('path') || 'beginner';
+            const chapterId = urlParams.get('chapter') || '';
+            const lessonId = urlParams.get('lesson') || '';
+
+            if (!window.CURRICULUM || !window.CURRICULUM[pathId]) {
+                console.error('Path not found');
+                return;
+            }
+
+            const path = window.CURRICULUM[pathId];
+            const chapter = path.chapters.find(ch => ch.id === chapterId);
+            if (!chapter) {
+                console.error('Chapter not found');
+                return;
+            }
+
+            const lesson = chapter.lessons.find(l => l.id === lessonId);
+            if (!lesson) {
+                console.error('Lesson not found');
+                return;
+            }
+
+            // Initialize dashboard enhancements
+            if (!window.dashboardEnhancements) {
+                window.dashboardEnhancements = new DashboardEnhancements();
+            }
+
+            // Set gradient background based on chapter
+            const gradients = {
+                'ch1-blockchain-basics': 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                'ch2-bitcoin': 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+                'ch3-wallets': 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+                'ch4-ethereum-basics': 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
+                'ch5-layer2': 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'
+            };
+            const gradient = gradients[chapterId] || 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            document.body.style.background = gradient;
+
+            // Update lesson info
+            document.getElementById('lesson-title').textContent = lesson.title;
+            document.getElementById('lesson-path-name').textContent = path.title;
+            document.getElementById('lesson-chapter-name').textContent = chapter.title;
+
+            // Load story content
+            loadStoryContent(lesson, chapter, path);
+
+            // Load challenges
+            loadChallenges(lesson, chapter);
+
+            // Setup tab switching
+            document.querySelectorAll('.lesson-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabName = this.dataset.tab;
+                    document.querySelectorAll('.lesson-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.lesson-tab-content').forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                    document.getElementById(`content-${tabName}`).classList.add('active');
+                });
+            });
+
+            // Setup code editor tabs
+            document.querySelectorAll('.code-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const lang = this.dataset.lang;
+                    document.querySelectorAll('.code-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.code-editor').forEach(e => e.classList.add('hidden'));
+                    this.classList.add('active');
+                    document.getElementById(`code-editor-${lang}`).classList.remove('hidden');
+                });
+            });
+
+            // Setup start lesson button
+            document.getElementById('btn-start-lesson').addEventListener('click', function() {
+                startLesson(lesson);
+            });
+
+            // Setup code editor
+            setupCodeEditor(lesson);
+
+            // Setup terminal
+            setupTerminal(lesson);
+
+            // Setup quiz
+            setupQuiz(lesson);
+
+            function loadStoryContent(lesson, chapter, path) {
+                const storyContent = document.getElementById('lesson-story');
+                // Generate story content based on lesson
+                const storyText = generateStoryContent(lesson, chapter, path);
+                storyContent.innerHTML = storyText;
+            }
+
+            function generateStoryContent(lesson, chapter, path) {
+                // This would normally come from a content API or database
+                // For now, generate placeholder content
+                return `
+                    <div class="story-paragraph">
+                        <p>Welcome to ${lesson.title}!</p>
+                        <p>In this lesson, you'll learn about ${chapter.title.toLowerCase()} and how it relates to ${path.title.toLowerCase()}.</p>
+                        <p>${lesson.type === 'code' ? 'You\'ll get hands-on experience writing code.' : ''}
+                        ${lesson.type === 'challenge' ? 'This is a challenging exercise that will test your understanding.' : ''}
+                        ${lesson.type === 'interactive' ? 'This is an interactive lesson with hands-on activities.' : ''}
+                        ${lesson.type === 'reading' ? 'Read through the content carefully and take notes.' : ''}</p>
+                    </div>
+                `;
+            }
+
+            function loadChallenges(lesson, chapter) {
+                const challengesList = document.getElementById('challenges-list');
+                // Generate challenges list
+                challengesList.innerHTML = `
+                    <div class="challenge-item">
+                        <div class="challenge-icon">${lesson.type === 'code' ? '💻' : lesson.type === 'challenge' ? '⚡' : '📖'}</div>
+                        <div class="challenge-content">
+                            <h3>${lesson.title}</h3>
+                            <p>${lesson.type.charAt(0).toUpperCase() + lesson.type.slice(1)} • ${lesson.duration} min • +${lesson.xp} XP</p>
+                        </div>
+                        <div class="challenge-status">
+                            <button class="btn-start-challenge" onclick="startLesson()">Start</button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function startLesson(lesson) {
+                // Hide story content, show appropriate section
+                document.getElementById('content-info').classList.remove('active');
+                document.getElementById('tab-info').classList.remove('active');
+                document.getElementById('content-challenges').classList.add('active');
+                document.getElementById('tab-challenges').classList.add('active');
+
+                if (lesson.type === 'code' || lesson.type === 'challenge') {
+                    document.getElementById('code-editor-section').classList.remove('hidden');
+                } else if (lesson.type === 'interactive') {
+                    // Show quiz or interactive content
+                    document.getElementById('quiz-section').classList.remove('hidden');
+                }
+            }
+
+            function setupCodeEditor(lesson) {
+                const textareaJs = document.getElementById('code-textarea-js');
+                const textareaPython = document.getElementById('code-textarea-python');
+
+                // Update line numbers
+                function updateLineNumbers(textarea, lineNumbersEl) {
+                    const lines = textarea.value.split('\n').length;
+                    lineNumbersEl.innerHTML = Array.from({ length: lines }, (_, i) => `<div>${i + 1}</div>`).join('');
+                }
+
+                textareaJs.addEventListener('input', () => updateLineNumbers(textareaJs, document.getElementById('line-numbers-js')));
+                textareaPython.addEventListener('input', () => updateLineNumbers(textareaPython, document.getElementById('line-numbers-python')));
+
+                // Run code button
+                document.getElementById('btn-run-code').addEventListener('click', function() {
+                    const activeLang = document.querySelector('.code-tab.active').dataset.lang;
+                    const code = document.getElementById(`code-textarea-${activeLang}`).value;
+                    runCode(code, activeLang);
+                });
+
+                // Submit code button
+                document.getElementById('btn-submit-code').addEventListener('click', function() {
+                    const activeLang = document.querySelector('.code-tab.active').dataset.lang;
+                    const code = document.getElementById(`code-textarea-${activeLang}`).value;
+                    submitCode(code, activeLang, lesson);
+                });
+            }
+
+            function runCode(code, lang) {
+                const output = document.getElementById('code-output-content');
+                output.innerHTML = '<div class="output-line">Running code...</div>';
+                
+                // Simple code execution (in production, this would be done server-side)
+                setTimeout(() => {
+                    output.innerHTML = '<div class="output-line">Code executed successfully!</div>';
+                }, 500);
+            }
+
+            function submitCode(code, lang, lesson) {
+                // Validate code and show success
+                showSuccessModal(lesson.xp, lesson);
+            }
+
+            function setupTerminal(lesson) {
+                const terminalInput = document.getElementById('terminal-input');
+                const terminalContent = document.getElementById('terminal-content');
+
+                terminalInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        const command = this.value;
+                        executeTerminalCommand(command);
+                        this.value = '';
+                    }
+                });
+            }
+
+            function executeTerminalCommand(command) {
+                const terminalContent = document.getElementById('terminal-content');
+                const terminalInput = document.getElementById('terminal-input');
+                
+                // Add command to terminal
+                terminalContent.innerHTML += `
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">$</span>
+                        <span class="terminal-text">${command}</span>
+                    </div>
+                `;
+
+                // Simple command execution
+                let output = '';
+                if (command.startsWith('echo')) {
+                    output = command.substring(5).trim();
+                } else {
+                    output = 'Command executed';
+                }
+
+                terminalContent.innerHTML += `
+                    <div class="terminal-line output">
+                        <span class="terminal-text">${output}</span>
+                    </div>
+                `;
+
+                terminalContent.scrollTop = terminalContent.scrollHeight;
+            }
+
+            function setupQuiz(lesson) {
+                // Generate quiz questions (in production, from API/database)
+                const questions = [
+                    {
+                        question: 'What is blockchain?',
+                        options: ['A distributed ledger', 'A cryptocurrency', 'A programming language', 'A database'],
+                        correct: 0
+                    }
+                ];
+
+                // Setup quiz UI
+                // This would be populated with actual quiz data
+            }
+
+            function showSuccessModal(xp, lesson) {
+                const modal = document.getElementById('success-modal');
+                document.getElementById('success-xp-amount').textContent = `+${xp}`;
+                modal.classList.remove('hidden');
+
+                // Complete lesson
+                const urlParams = new URLSearchParams(window.location.search);
+                const pathId = urlParams.get('path');
+                const chapterId = urlParams.get('chapter');
+                const lessonId = urlParams.get('lesson');
+
+                window.dashboardEnhancements.completeLesson(lessonId, chapterId, pathId, xp, 100);
+
+                // Setup continue button
+                document.getElementById('btn-continue-lesson').addEventListener('click', function() {
+                    // Navigate to next lesson or back to courses
+                    window.location.href = 'courses.html?path=' + pathId;
+                });
+
+                // Setup share button
+                document.getElementById('btn-share-x').addEventListener('click', function() {
+                    const text = `I just completed "${lesson.title}" on Cryptocrib and earned ${xp} XP! 🚀`;
+                    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+                    window.open(url, '_blank');
+                });
+            }
+
+            // Make startLesson available globally
+            window.startLesson = function() {
+                startLesson(lesson);
+            };
+        });
+    </script>
+</body>
+</html>
+
